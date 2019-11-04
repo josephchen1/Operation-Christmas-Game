@@ -19,8 +19,8 @@ class player{
     rect(x,y,20,100);
     rect(10,10,250,health);//health bar
   }
-  
-  void move(){
+  //make 4 seperate move functions so all wasd keys have their own.
+  void move(){//moving and not allowing player to go past the walls
     x+=dx;
     y+=dy;
      if (x + 10 > width) {
