@@ -17,6 +17,7 @@ class player{
   void display(){
     fill(0);
     rect(x,y,20,100);
+    rect(10,10,250,health);//health bar
   }
   
   void move(){
