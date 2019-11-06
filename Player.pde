@@ -17,6 +17,7 @@ class player{
   void display(){
     fill(0);
     rect(x,y,20,100);
+    text("name",x+10,y+10);//name tag
     rect(10,10,250,health);//health bar
   }
   //make 4 seperate move functions so all wasd keys have their own.
