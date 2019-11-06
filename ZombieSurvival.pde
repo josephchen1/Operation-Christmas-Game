@@ -2,6 +2,8 @@
 PImage startscreen;
 // input ground background image for game
 PImage ground;
+PImage ground2;
+PImage ground3;
 // create level system
 int level;
 
@@ -40,19 +42,34 @@ void draw() {
     if (mouseX>225 && mouseX<975 && mouseY>635 && mouseY<735 && mousePressed==true) {
       level=20;
     }
-    // into game
-    if (level==2) {
+  }
+
+  if (level==2) {
     background(0,0,0);
     // loading an image to variable ground
     ground = loadImage("land.jpg");
     // loading image "ground" into game
     image(ground, 0, 0, 1200, 800);
-    }
-    if (level==10) {
-      background(0,0,0);
-    }
-    if (level==20) {
-      background(255,120,120);
+    Barrel john = new Barrel(500,500,100);
+    john.display();
+    fill(255,0,0);
+       if (mouseX>john.x-25 && mouseX<john.x+25 && mouseY>john.y-25
+       && mouseY<john.y+25 && mousePressed==true) {
+       println("box click");
     }
   }
+  
+  
+  if (level==10) {
+      background(0,0,0);
+      ground2 = loadImage("bg1.jpg");
+      image(ground2, 0, 0, 1200, 800);
+  }
+    
+  if (level==20) {
+      background(255,120,120);
+      ground3 = loadImage("bg2.jpg");
+      image(ground3, 0, 0, 1200, 800);
+  }
 }
+
