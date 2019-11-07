@@ -54,8 +54,9 @@ void draw() {
     image(ground, 0, 0, 1200, 800);
     Barrel jo = new Barrel(500,500,100);
     jo.display();
-    john.display();
     fill(255,0,0);
+    john.display();
+    john.move();
        if (mouseX>john.x-25 && mouseX<john.x+25 && mouseY>john.y-25
        && mouseY<john.y+25 && mousePressed==true) {
        println("box click");
@@ -76,12 +77,3 @@ void draw() {
   }
 }
 
-void keyPressed() {
-    
-  if (key == 'w') { john.velocity.y -= john.speed; }
-  if (key == 'a') { john.velocity.x -= john.speed; }
-  if (key == 's') { john.velocity.y += john.speed; }
-  if (key == 'd') { john.velocity.x += john.speed; }
-  john.pos.add(john.velocity);
-  john.velocity.mult(0.9);
-  }
