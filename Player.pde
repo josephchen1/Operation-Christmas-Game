@@ -36,6 +36,7 @@ class Player {
   john.pos.add(john.velocity);
   john.velocity.mult(0.9);
   }
+  if (health <=0) {die();}
   }
   
   /*public void helth(){
