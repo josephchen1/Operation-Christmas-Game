@@ -1,50 +1,26 @@
-class player{
-  float x;
-  float y;
-  float dx;
-  float dy;
-  float health;
-  String name;
+class Player {
+  private float x;
+  private float y;
+  private float speed;
+  private float health;
+  private String name;
+  PVector pos = new PVector();
   
-  player(float xx, float yy, float ddx, float ddy, float hhealth, String nname){
-    x = xx;
-    y = yy;
-    dx = ddx;
-    dy = ddy;
-    health = hhealth;
-    name = nname;    
+  public Player (float xx, float yy, float spd, float hhealth, String nname) {
+    this.pos.x = xx;
+    this.pos.y = yy;
+    this.speed = spd;
+    this.health = hhealth;
+    this.name = nname;    
   }
-  void display(){
-    fill(0);
-    rect(x,y,20,100);
-    text("name",x+10,y+10);//name tag
+  
+  PVector velocity = new PVector(0,0);
+  
+  public void display(){
+    stroke(0);
+    fill(255, 122, 122);
+    rect(this.pos.x,this.pos.y,20,100);
+    text(name,pos.x,pos.y-80);//name tag
     rect(10,10,250,health);//health bar
   }
-  //make 4 seperate move functions so all wasd keys have their own.
-  void move(){//moving and not allowing player to go past the walls
-    x+=dx;
-    y+=dy;
-     if (x + 10 > width) {
-      x = width - 10;
-      dx *= -1; 
-    }
-    else if (x - 10 < 0) {
-      x = 10;
-      dx *= -1;
-    }
-    if (y + 10 > height) {
-      y = height - 10;
-      dy *= -1; 
-    } 
-    else if (y - 10 < 0) {
-      y = 10;
-      dy *= -1;
-    }
-  }
-  
-  void colliding_z(){}
-  void colliding_a(){}
-  
-  
-  
 }
