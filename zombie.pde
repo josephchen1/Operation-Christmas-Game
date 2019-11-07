@@ -14,7 +14,7 @@ class zombie{
   }
   void display(){
     fill(0);
-    rect(random(255),random(255),20,100);
+    rect(x,y,20,100);
   }
   void move(){}
   
