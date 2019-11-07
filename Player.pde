@@ -52,6 +52,9 @@ class Player {
   }
   
   public void shoot(){
-    
+  
+   /*public boolean hit(){
+    return(this.pos.x==zombie.x&&this.pos.y==zombie.y);
+  }*/
   }
 }
