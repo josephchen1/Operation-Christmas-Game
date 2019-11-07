@@ -6,6 +6,7 @@ PImage ground2;
 PImage ground3;
 // create level system
 int level;
+Player john = new Player(800, 400, 1, 100, "John");
 
 void setup() {
   // level is set to 1
@@ -15,6 +16,7 @@ void setup() {
   startscreen = loadImage("zombiebackground.jpg");
   // loading image to screen
   image(startscreen, 0, 0, 1200, 800);
+ 
 
 }
 
@@ -50,7 +52,8 @@ void draw() {
     ground = loadImage("land.jpg");
     // loading image "ground" into game
     image(ground, 0, 0, 1200, 800);
-    Barrel john = new Barrel(500,500,100);
+    Barrel jo = new Barrel(500,500,100);
+    jo.display();
     john.display();
     fill(255,0,0);
        if (mouseX>john.x-25 && mouseX<john.x+25 && mouseY>john.y-25
@@ -73,3 +76,12 @@ void draw() {
   }
 }
 
+void keyPressed() {
+    
+  if (key == 'w') { john.velocity.y -= john.speed; }
+  if (key == 'a') { john.velocity.x -= john.speed; }
+  if (key == 's') { john.velocity.y += john.speed; }
+  if (key == 'd') { john.velocity.x += john.speed; }
+  john.pos.add(john.velocity);
+  john.velocity.mult(0.9);
+  }
