@@ -2,11 +2,11 @@ class Player {
   private float x;
   private float y;
   private float speed;
-  private float health;
+  private int health=100;
   private String name;
   PVector pos = new PVector();
   
-  public Player (float xx, float yy, float spd, float hhealth, String nname) {
+  public Player (float xx, float yy, float spd, int hhealth, String nname) {
     this.pos.x = xx;
     this.pos.y = yy;
     this.speed = spd;
@@ -21,6 +21,36 @@ class Player {
     fill(255, 122, 122);
     rect(this.pos.x,this.pos.y,20,100);
     text(name,pos.x,pos.y-80);//name tag
-    rect(10,10,250,health);//health bar
+    rect(10,10,250,health);
+    fill(255, 255, 255);
+    text(health, 55,40);//health bar
+  }
+  
+
+  void move () { 
+  if (keyPressed && (key=='w' || key=='a' || key=='s' || key=='d')){
+  if (key == 'w') { john.velocity.y -= john.speed; }
+  if (key == 'a') { john.velocity.x -= john.speed; }
+  if (key == 's') { john.velocity.y += john.speed; }
+  if (key == 'd') { john.velocity.x += john.speed; }
+  john.pos.add(john.velocity);
+  john.velocity.mult(0.9);
+  }
+  }
+  
+  /*public void helth(){
+    if (zombie.punch(player)){
+    health -= 10;
+    
+    }
+    
+  }*/
+ 
+  public void die(){
+
+  }
+  
+  public void shoot(){
+    
   }
 }
