@@ -17,8 +17,9 @@ void setup() {
   startscreen = loadImage("zombiebackground.jpg");
   // loading image to screen
   image(startscreen, 0, 0, width, height);
- 
-
+  ArrayList<zombie> zombies = new ArrayList<zombie>(255);
+       for (int i= 0;i<25; i++){ //Creates 25 enemies
+         zombies.add(new zombie(100, 100, 1, 1, 100));
 }
 
 void draw() {
