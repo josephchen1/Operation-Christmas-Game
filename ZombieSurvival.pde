@@ -9,13 +9,14 @@ int level;
 Player john = new Player(800, 400, 1, 100, "John");
 
 void setup() {
+  frameRate (30);
   // level is set to 1
   level = 1;
-  size(1200, 800);
+  fullScreen();
   // loading image from file
   startscreen = loadImage("zombiebackground.jpg");
   // loading image to screen
-  image(startscreen, 0, 0, 1200, 800);
+  image(startscreen, 0, 0, width, height);
  
 
 }
@@ -51,7 +52,7 @@ void draw() {
     // loading an image to variable ground
     ground = loadImage("land.jpg");
     // loading image "ground" into game
-    image(ground, 0, 0, 1200, 800);
+    image(ground, 0, 0, width, height);
     Barrel jo = new Barrel(500,500,100);
     jo.display();
     fill(255,0,0);
@@ -67,13 +68,13 @@ void draw() {
   if (level==10) {
       background(0,0,0);
       ground2 = loadImage("bg1.jpg");
-      image(ground2, 0, 0, 1200, 800);
+      image(ground2, 0, 0, width, height);
   }
     
   if (level==20) {
       background(255,120,120);
       ground3 = loadImage("bg2.jpg");
-      image(ground3, 0, 0, 1200, 800);
+      image(ground3, 0, 0, width, height);
   }
 }
 
