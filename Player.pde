@@ -1,3 +1,5 @@
+PImage weeb;
+
 class Player {
   private float x;
   private float y;
@@ -19,7 +21,8 @@ class Player {
   public void display(){
     stroke(0);
     fill(255, 122, 122);
-    rect(this.pos.x,this.pos.y,20,100);
+    weeb = loadImage("weeb.png");
+    image(weeb, this.pos.x,this.pos.y,50,100);
     text(name,pos.x,pos.y-80);//name tag
     rect(10,10,250,health);
     fill(255, 255, 255);
