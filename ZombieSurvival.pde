@@ -6,7 +6,7 @@ PImage ground2;
 PImage ground3;
 // create level system
 int level;
-Player john = new Player(800, 400, 1, 100, "John");
+Player john = new Player(random(width+100,width-100), random(height+100,height-100), 1, 100);
 
 void setup() {
   frameRate (30);
@@ -58,6 +58,7 @@ void draw() {
     fill(255,0,0);
     john.display();
     john.move();
+       
        if (mouseX>john.x-25 && mouseX<john.x+25 && mouseY>john.y-25
        && mouseY<john.y+25 && mousePressed==true) {
        println("box click");
