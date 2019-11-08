@@ -5,15 +5,13 @@ class Player {
   private float y;
   private float speed;
   private int health=100;
-  private String name;
   PVector pos = new PVector();
   
-  public Player (float xx, float yy, float spd, int hhealth, String nname) {
+  public Player (float xx, float yy, float spd, int hhealth) {
     this.pos.x = xx;
     this.pos.y = yy;
     this.speed = spd;
     this.health = hhealth;
-    this.name = nname;    
   }
   
   PVector velocity = new PVector(0,0);
@@ -21,9 +19,9 @@ class Player {
   public void display(){
     stroke(0);
     fill(255, 122, 122);
-    weeb = loadImage("weeb.png");
-    image(weeb, this.pos.x,this.pos.y,50,100);
-    text(name,pos.x,pos.y-80);//name tag
+    ellipse(this.pos.x,this.pos.y,50,50);
+    ellipse(this.pos.x-20,this.pos.y,20,20);
+    ellipse(this.pos.x+20,this.pos.y,20,20);
     rect(10,10,250,health);
     fill(255, 255, 255);
     text(health, 55,40);//health bar
@@ -32,12 +30,12 @@ class Player {
 
   void move () { 
   if (keyPressed && (key=='w' || key=='a' || key=='s' || key=='d')){
-  if (key == 'w') { john.velocity.y -= john.speed; }
-  if (key == 'a') { john.velocity.x -= john.speed; }
-  if (key == 's') { john.velocity.y += john.speed; }
-  if (key == 'd') { john.velocity.x += john.speed; }
-  john.pos.add(john.velocity);
-  john.velocity.mult(0.9);
+  if (key == 'w') { velocity.y -= speed; }
+  if (key == 'a') { velocity.x -= speed; }
+  if (key == 's') { velocity.y += speed; }
+  if (key == 'd') { velocity.x += speed; }
+  pos.add(john.velocity);
+  velocity.mult(0.9);
   }
   if (health <=0) {die();}
   }
