@@ -1,11 +1,11 @@
-PImage weeb;
-
 class Player {
   private float x;
   private float y;
   private float speed;
   private int health=100;
   PVector pos = new PVector();
+  Boolean[]keys = new Boolean[1];
+  PVector velocity = new PVector(0,0);
   
   public Player (float xx, float yy, float spd, int hhealth) {
     this.pos.x = xx;
@@ -14,21 +14,26 @@ class Player {
     this.health = hhealth;
   }
   
-  PVector velocity = new PVector(0,0);
-  
   public void display(){
     stroke(0);
     fill(255, 122, 122);
     ellipse(this.pos.x,this.pos.y,50,50);
     ellipse(this.pos.x-20,this.pos.y,20,20);
     ellipse(this.pos.x+20,this.pos.y,20,20);
-    rect(10,10,250,health);
-    fill(255, 255, 255);
-    text(health, 55,40);//health bar
+    
     for (int i = 0; i < projectiles.size(); i ++) {
         projectiles.get(i).display();
         projectiles.get(i).move();
     }
+     for (int x = 0; x < zombies.size(); x ++) {
+        zombies.get(x).display();
+        zombies.get(x).move(john);
+     }
+     
+    fill(255, 122, 122);
+    rect(10,10,250,health);
+    fill(255, 255, 255);
+    text(health, 55,40);//health bar
   }
   
 
@@ -61,6 +66,6 @@ class Player {
       System.out.println("Hi");
       projectiles.add(new Projectile(this.pos.x, this.pos.y));
       
-    }
+  }
   }
 }
