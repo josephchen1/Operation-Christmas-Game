@@ -1,20 +1,18 @@
-// input startscreen background impace
 PImage startscreen;
-// input ground background image for game
 PImage ground;
 PImage ground2;
 PImage ground3;
-// create level system
 int level;
-Player john = new Player(random(width+100,width-100), random(height+100,height-100), 1, 100);
+Player john = new Player(800, 500, 1, 100);
 ArrayList<Projectile> projectiles;
+ArrayList<Zombie> zombies = new ArrayList<Zombie> (255);
 float x = 500;
 float y = 500;
 
+
 void setup() {
-  frameRate(30);
+
   projectiles = new ArrayList<Projectile>();
-  frameRate (30);
   // level is set to 1
   level = 1;
   fullScreen();
@@ -22,11 +20,8 @@ void setup() {
   startscreen = loadImage("zombiebackground.jpg");
   // loading image to screen
   image(startscreen, 0, 0, width, height);
-  ArrayList<zombie> zombies = new ArrayList<zombie>(255);
-       for (int i= 0;i<25; i++){ //Creates 25 enemies
-         zombies.add(new zombie(100, 100, 1, 1, 100));
 }
-}
+
 
 void draw() {
   // start menu
@@ -55,6 +50,16 @@ void draw() {
   }
 
   if (level==2) {
+    if (zombies.size()==0) {
+      for (int i= 0;i<10; i++){ //Creates 10 enemies
+         zombies.add(new Zombie(random(0,100), random(height), 1, 1, 100));}
+      for (int x= 0;x<10; x++){ //Creates 10 enemies
+         zombies.add(new Zombie(random(width-100,width), random(height), 1, 1, 100));}
+      for (int j= 0;j<10; j++){ //Creates 10 enemies
+         zombies.add(new Zombie(random(width), random(height-100,height), 1, 1, 100));}
+      for (int k= 0;k<10; k++){ //Creates 10 enemies
+         zombies.add(new Zombie(random(width), random(0,100), 1, 1, 100));}
+    }
     background(0,0,0);
     // loading an image to variable ground
     ground = loadImage("land.jpg");
@@ -66,8 +71,10 @@ void draw() {
     john.display();
     john.move();
     john.shoot();
-    }
-  
+         
+    } 
+    
+    
   
   
   if (level==10) {
