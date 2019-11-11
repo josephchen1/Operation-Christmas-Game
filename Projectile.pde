@@ -2,8 +2,6 @@ class Projectile {
 
   //Fields
   float x, y, angle, speed, xInitialOffset, yInitialOffset, size;
-   float dx = speed*cos(angle);
-    float dy = speed*sin(angle);
   boolean destroy;
 
   //Constructor
@@ -12,6 +10,8 @@ class Projectile {
     size = 20;
     x = xx;
     y = yy;
+    float dx = speed*cos(angle);
+    float dy = speed*sin(angle);
     destroy = false;
     
     float xDiff = mouseX - x;
@@ -25,7 +25,7 @@ class Projectile {
   }
 
   void move() {
-    x += dx;
-    y += dy;
+    x += speed*cos(angle);
+    y += speed*sin(angle);
   }
 }
