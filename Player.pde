@@ -25,6 +25,10 @@ class Player {
     rect(10,10,250,health);
     fill(255, 255, 255);
     text(health, 55,40);//health bar
+    for (int i = 0; i < projectiles.size(); i ++) {
+        projectiles.get(i).display();
+        projectiles.get(i).move();
+    }
   }
   
 
@@ -53,9 +57,10 @@ class Player {
   }
   
   public void shoot(){
-  
-   /*public boolean hit(){
-    return(this.pos.x==zombie.x&&this.pos.y==zombie.y);
-  }*/
+    if (mousePressed == true) {
+      System.out.println("Hi");
+      projectiles.add(new Projectile(this.pos.x, this.pos.y));
+      
+    }
   }
 }
