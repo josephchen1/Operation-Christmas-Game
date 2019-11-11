@@ -7,8 +7,13 @@ PImage ground3;
 // create level system
 int level;
 Player john = new Player(random(width+100,width-100), random(height+100,height-100), 1, 100);
+ArrayList<Projectile> projectiles;
+float x = 500;
+float y = 500;
 
 void setup() {
+  frameRate(30);
+  projectiles = new ArrayList<Projectile>();
   frameRate (30);
   // level is set to 1
   level = 1;
@@ -20,6 +25,7 @@ void setup() {
   ArrayList<zombie> zombies = new ArrayList<zombie>(255);
        for (int i= 0;i<25; i++){ //Creates 25 enemies
          zombies.add(new zombie(100, 100, 1, 1, 100));
+}
 }
 
 void draw() {
@@ -59,12 +65,9 @@ void draw() {
     fill(255,0,0);
     john.display();
     john.move();
-       
-       if (mouseX>john.x-25 && mouseX<john.x+25 && mouseY>john.y-25
-       && mouseY<john.y+25 && mousePressed==true) {
-       println("box click");
+    john.shoot();
     }
-  }
+  
   
   
   if (level==10) {
@@ -79,4 +82,3 @@ void draw() {
       image(ground3, 0, 0, width, height);
   }
 }
-
