@@ -11,7 +11,6 @@ float y = 500;
 
 
 void setup() {
-
   projectiles = new ArrayList<Projectile>();
   // level is set to 1
   level = 1;
@@ -24,6 +23,15 @@ void setup() {
 
 
 void draw() {
+  if (mousePressed==true && mouseX>width-30 && mouseX<width && mouseY>0 && mouseY<30) {
+    System.out.println("true");
+    level = 1;
+    fullScreen();
+    // loading image from file
+    startscreen = loadImage("zombiebackground.jpg");
+    // loading image to screen
+    image(startscreen, 0, 0, width, height);
+  }
   // start menu
   if (level==1) {
     textSize(50);
@@ -47,6 +55,26 @@ void draw() {
     if (mouseX>225 && mouseX<975 && mouseY>635 && mouseY<735 && mousePressed==true) {
       level=20;
     }
+    /*fix the start menu code in progress
+     text("ZOMBIE SURVIVAL",width/2,height/2-100);
+    text("Click here for EASY MODE",width/2,height/2);
+    text("Click here for MEDIUM MODE",width/2,height/2+100);
+    text("Click here for HARD MODE",width/2,height/2+200);
+    rectMode(CENTER);
+    fill(255, 0);
+    rect(width/2,height/2,750,100);
+    rect(width/2,height/2+100,750,100);
+    rect(width/2,height/2+200,750,100);
+    // if key is pressed, then it goes into game
+    if (mouseX>(width/2-375) && mouseX<(width/2+375) && mouseY>435 && mouseY<535 && mousePressed==true) {
+      level=2;
+    }
+    if (mouseX>(width/2-375) && mouseX<(width/2+375) && mouseY<635 && mousePressed==true) {
+      level=10;
+    }
+    if (mouseX>(width/2-375) && mouseX<(width/2+375) && mouseY<735 && mousePressed==true) {
+      level=20;
+    }  */
   }
 
   if (level==2) {
