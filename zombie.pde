@@ -25,12 +25,15 @@ class Zombie {
     }
   }
   void move(Player player){
-  float xDiff = player.x - x;
-  float yDiff = player.y - x;
-  float distance = sqrt(xDiff*xDiff+yDiff*yDiff);
-  float angle = atan2(yDiff,xDiff);
-  dx -= cos(angle);
-  dy -= sin(angle);
+    x += dx;
+    y += dy;
+    float xDiff = x - player.pos.x;
+    System.out.print(player.pos.x);
+    float yDiff = y - player.pos.y;
+    float distance = sqrt(xDiff*xDiff+yDiff*yDiff);
+    float angle = atan2(yDiff,xDiff);
+    dx -= cos(angle);
+    dy -= sin(angle);
   }
   
   
