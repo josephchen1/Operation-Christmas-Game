@@ -34,15 +34,5 @@ class Zombie {
     float angle = atan2(yDiff,xDiff);
     dx -= cos(angle);
     dy -= sin(angle);
-  }
-  
-  /*public void die (){
-    if (shot)
-    remove from array list
-    
-  }
-  */
-  
-  
-  
+  }  
 }
