@@ -63,7 +63,7 @@ class Player {
   if (key == 'a') { velocity.x -= speed; }
   if (key == 's') { velocity.y += speed; }
   if (key == 'd') { velocity.x += speed; }
-  pos.add(john.velocity);
+  pos.add(velocity);
   velocity.mult(0.9);
   }
   if (health <=0) {die();}
@@ -103,14 +103,32 @@ class Player {
   
 }
 
-public void die() {if (health <= 0) {pos.y = -100000000; pos.x = -100000000; }}
-
-
-    
     public void play(){
   move();
   display();
   shoot();
   die();
 }
+
+public void die() {
+if (health <= 0) {
+  pos.y = -100000000; 
+  pos.x = -100000000; 
+
+  health = 0; 
+
+
+  textSize(200);
+  fill(196,24,24);
+  text("WASTED", width/2, height/2); 
+  textSize(50);
+
+  
+}
+
+}
+
+
+    
+
 }
