@@ -29,6 +29,27 @@ void setup() {
 
 
 void draw() {
+  for (int x = 0; x<projectiles.size(); x++) {
+      for (int y = 0; y<zombies.size(); y++) {
+        float distance_x = zombies.get(y).x - projectiles.get(x).x;
+        float distance_y = zombies.get(y).y - projectiles.get(x).y;
+        float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
+          if (distance < (zombies.get(y).radius/2 + 10)) {
+            zombies.remove(y);
+          }
+        }
+    }
+  for (int x = 0; x<projectiles.size(); x++) {
+      for (int y = 0; y<barrels.size(); y++) {
+        float distance_x = barrels.get(y).x - projectiles.get(x).x;
+        float distance_y = barrels.get(y).y - projectiles.get(x).y;
+        float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
+          if (distance < (25 + 10)) {
+            barrels.get(y).explode(barrels.get(y).x, barrels.get(y).y);
+            barrels.remove(y);
+          }
+        }
+    }
   if (mousePressed==true && mouseX>width-30 && mouseX<width && mouseY>0 && mouseY<30) {
     System.out.println("true");
     level = 1;
