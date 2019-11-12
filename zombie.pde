@@ -1,8 +1,8 @@
 class Zombie {
   float x;
   float y;
-  float dx;
-  float dy;
+  float dx = random(.1, .9);
+  float dy = random(.1, .9);
   float health;
   float radius = 20;
   
@@ -26,10 +26,9 @@ class Zombie {
     }
   }
   void move(Player player){
-    x += dx;
-    y += dy;
+    x += 0.01*dx;
+    y += 0.01*dy;
     float xDiff = x - player.pos.x;
-    System.out.print(player.pos.x);
     float yDiff = y - player.pos.y;
     float distance = sqrt(xDiff*xDiff+yDiff*yDiff);
     float angle = atan2(yDiff,xDiff);
