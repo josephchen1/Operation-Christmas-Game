@@ -4,6 +4,7 @@ class Zombie {
   float dx;
   float dy;
   float health;
+  float radius = 20;
   
   Zombie(float xx, float yy, float ddx, float ddy, float hhealth){
     x = xx;
@@ -15,7 +16,7 @@ class Zombie {
   
   void display() {
     fill(0);
-    rect(x,y,20,100);
+    ellipse (x,y,radius,radius);
   }
   
   public void update() {
@@ -35,6 +36,13 @@ class Zombie {
     dx -= cos(angle);
     dy -= sin(angle);
   }
+  
+  /*public void die (){
+    if (shot)
+    remove from array list
+    
+  }
+  */
   
   
   
