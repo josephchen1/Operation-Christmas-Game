@@ -40,15 +40,15 @@ class Player {
      }
      
     fill(255, 122, 122);
-    rect(10,10,250,health);
-    fill(255, 255, 255);
+    rect(10,10,250,80);
+    fill(0);
     text(health, 55,40);//health bar
   }
   
   
   
       public void teleport(){
-    if (pos.y < -50) {
+    if (pos.y < -Pradius) {
       pos.y = height + Pradius;
     } else
       if (pos.y > height + Pradius) {
