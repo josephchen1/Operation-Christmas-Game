@@ -6,16 +6,25 @@ int level;
 Player john = new Player(800, 500, 20, 100);
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 ArrayList<Zombie> zombies = new ArrayList<Zombie> ();
+
 ArrayList<Barrel> barrels = new ArrayList<Barrel>();
 float x = 500;
 float y = 500;
 
+Snow[] flakes = new Snow[300];
 
 void setup() {
   level = 1;
-  fullScreen();
-  startscreen = loadImage("zombiebackground.jpg");
+  //fullScreen();
+  size(1200,800);
+  startscreen = loadImage("santa.jpg");
   image(startscreen, 0, 0, width, height);
+  
+    for (int i = 0; i<flakes.length; i++) { 
+    flakes[i] = new Snow(random(2, 10));
+    flakes[i].spreadY(i);
+  }
+  
 }
 
 
@@ -23,12 +32,19 @@ void draw() {
   if (mousePressed==true && mouseX>width-30 && mouseX<width && mouseY>0 && mouseY<30) {
     System.out.println("true");
     level = 1;
+    background (0);
     fullScreen();
-    startscreen = loadImage("zombiebackground.jpg");
+    startscreen = loadImage("santa.jpg");
     image(startscreen, 0, 0, width, height);
+
   }
   
+
+  
   if (level==1) {
+    background(0);
+      //startscreen = loadImage("santa.jpg");
+      //image(startscreen, 0, 0, width, height);
     textSize(50);
     textAlign(CENTER);
     text("ZOMBIE SURVIVAL",600,400);
@@ -40,6 +56,15 @@ void draw() {
     rect(600,485,750,100);
     rect(600,585,750,100);
     rect(600,685,750,100);
+    
+    for (int i = 0; i < flakes.length; i++) {
+    flakes[i] .display();
+  if (flakes[i].x > 280 && flakes[i].y >445 && flakes[i].x<400){
+    flakes[i].bounce();  
+  }
+    }
+  
+  
     // if key is pressed, then it goes into game
     if (mouseX>225 && mouseX<975 && mouseY>435 && mouseY<535 && mousePressed==true) {
       level=2;
@@ -89,12 +114,13 @@ void draw() {
       }
     }
     
-    background(0,0,0);
+    background(255,255,255);
     // loading an image to variable ground
-    ground = loadImage("land.jpg");
-    // loading image "ground" into game
-    image(ground, 0, 0, width, height);
-    fill(255,0,0);
+    //ground = loadImage("land.jpg");
+    ////// loading image "ground" into game
+    ////image(ground, 0, 0, width, height);
+    //background(ground);
+    fill(255,0 ,0);
     john.play();
          
     } 
@@ -113,4 +139,6 @@ void draw() {
       ground3 = loadImage("bg2.jpg");
       image(ground3, 0, 0, width, height);
   }
+
+  
 }
