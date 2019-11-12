@@ -8,6 +8,7 @@ class Player {
   PVector velocity = new PVector(0,0);
   private float Pradius =50;
   boolean hit;
+  boolean dead;
   
   public Player (float xx, float yy, float spd, int hhealth) {
     this.pos.x = xx;
@@ -81,10 +82,10 @@ class Player {
   
   
   public void shoot(){
-    
+    if(dead==false){
     if (mousePressed == true) {
       projectiles.add(new Projectile(this.pos.x, this.pos.y));
-      
+    }
   }
   }
   
@@ -123,21 +124,13 @@ public void die() {
 if (health <= 0) {
   pos.y = -100000000; 
   pos.x = -100000000; 
-
+  
   health = 0; 
-
-
+  dead = true;
   textSize(200);
   fill(196,24,24);
   text("WASTED", width/2, height/2); 
   textSize(50);
-
-  
 }
-
 }
-
-
-    
-
 }
