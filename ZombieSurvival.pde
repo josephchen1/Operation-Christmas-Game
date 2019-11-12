@@ -3,7 +3,7 @@ PImage ground;
 PImage ground2;
 PImage ground3;
 int level;
-Player john = new Player(800, 500, 1, 100);
+Player john = new Player(800, 500, 20, 100);
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 ArrayList<Zombie> zombies = new ArrayList<Zombie> ();
 ArrayList<Barrel> barrels = new ArrayList<Barrel>();
@@ -94,8 +94,6 @@ void draw() {
     ground = loadImage("land.jpg");
     // loading image "ground" into game
     image(ground, 0, 0, width, height);
-    Barrel jo = new Barrel(500,500,100);
-    jo.display();
     fill(255,0,0);
     john.play();
          
