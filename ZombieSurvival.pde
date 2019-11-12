@@ -96,9 +96,7 @@ void draw() {
     Barrel jo = new Barrel(500,500,100);
     jo.display();
     fill(255,0,0);
-    john.display();
-    john.move();
-    john.shoot();
+    john.play();
          
     } 
     
