@@ -11,7 +11,7 @@ class Barrel {
     explosionradius = radius;
   }
   
-  public void explode() {
+  public void explode(float x, float y) {
     explosion = loadImage("explosion.jpg");
     image(explosion, x, y, 50, 50);
   }
