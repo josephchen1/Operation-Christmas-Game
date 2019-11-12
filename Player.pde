@@ -36,7 +36,6 @@ class Player {
      
      for (int z = 0; z < barrels.size(); z ++) {
         barrels.get(z).display();
-        barrels.get(z).explode();
      }
      
     fill(255, 122, 122);
