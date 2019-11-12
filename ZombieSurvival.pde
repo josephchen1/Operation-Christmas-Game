@@ -4,20 +4,17 @@ PImage ground2;
 PImage ground3;
 int level;
 Player john = new Player(800, 500, 1, 100);
-ArrayList<Projectile> projectiles;
-ArrayList<Zombie> zombies = new ArrayList<Zombie> (255);
+ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+ArrayList<Zombie> zombies = new ArrayList<Zombie> ();
+ArrayList<Barrel> barrels = new ArrayList<Barrel>();
 float x = 500;
 float y = 500;
 
 
 void setup() {
-  projectiles = new ArrayList<Projectile>();
-  // level is set to 1
   level = 1;
   fullScreen();
-  // loading image from file
   startscreen = loadImage("zombiebackground.jpg");
-  // loading image to screen
   image(startscreen, 0, 0, width, height);
 }
 
@@ -27,12 +24,10 @@ void draw() {
     System.out.println("true");
     level = 1;
     fullScreen();
-    // loading image from file
     startscreen = loadImage("zombiebackground.jpg");
-    // loading image to screen
     image(startscreen, 0, 0, width, height);
   }
-  // start menu
+  
   if (level==1) {
     textSize(50);
     textAlign(CENTER);
@@ -88,6 +83,12 @@ void draw() {
       for (int k= 0;k<10; k++){ //Creates 10 enemies
          zombies.add(new Zombie(random(width), random(0,100), 1, 1, 100));}
     }
+    if (barrels.size()==0) {
+      for (int l = 0; l<5; l++) {
+        barrels.add(new Barrel(random(width),random(height),50));
+      }
+    }
+    
     background(0,0,0);
     // loading an image to variable ground
     ground = loadImage("land.jpg");
