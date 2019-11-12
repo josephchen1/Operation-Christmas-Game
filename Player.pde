@@ -7,6 +7,7 @@ class Player {
   Boolean[]keys = new Boolean[1];
   PVector velocity = new PVector(0,0);
   private float Pradius =50;
+  boolean hit;
   
   public Player (float xx, float yy, float spd, int hhealth) {
     this.pos.x = xx;
@@ -32,6 +33,8 @@ class Player {
         zombies.get(x).display();
         zombies.get(x).move(john);
         punch(zombies.get(x));
+        if (hit==true){zombies.remove(x);}
+        
      }
      
      for (int z = 0; z < barrels.size(); z ++) {
@@ -86,14 +89,16 @@ class Player {
   }
   
   public void punch(Zombie other) {
-  
   float distance_x = other.x - pos.x;
   float distance_y = other.y - pos.y;
 
   float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
    if (distance < (other.radius + Pradius)) {
    health -= 10;
+   hit = true;
    }
+   else
+   hit = false;
 }
 
   public boolean overlap(Barrel other) {
