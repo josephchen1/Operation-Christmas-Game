@@ -4,6 +4,7 @@ class Barrel {
   public float x;
   public float y;
   public float explosionradius;
+  float radius = 20;
   
   public Barrel(float xx, float yy, float radius) {
     x = xx;
