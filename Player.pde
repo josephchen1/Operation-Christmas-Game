@@ -82,12 +82,12 @@ class Player {
   
   
   public void shoot(){
-    if(dead==false){
-    if (mousePressed == true) {
+    if(dead==false&&shootdelay==true){
       projectiles.add(new Projectile(this.pos.x, this.pos.y));
+      shootdelay=false;
     }
   }
-  }
+  
   
   public void punch(Zombie other) {
   float distance_x = other.x - pos.x;
@@ -118,7 +118,9 @@ class Player {
   display();
   shoot();
   die();
+  
 }
+
 
 public void die() {
 if (health <= 0) {
