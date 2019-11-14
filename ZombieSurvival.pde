@@ -29,7 +29,6 @@ void setup() {
 
 void mouseReleased() {
   shootdelay=true;
-  System.out.println("released");
 }
 
 void draw() {
