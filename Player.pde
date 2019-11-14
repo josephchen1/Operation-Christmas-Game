@@ -6,12 +6,12 @@ class Player {
   PVector pos = new PVector();
   Boolean[]keys = new Boolean[1];
   PVector velocity = new PVector(0,0);
-  private float Pradius =50;
+  private float Pradius = 50;
   boolean hit;
   boolean dead;
   int ammo = 20;
   int energy = 100;
-  
+
   public Player (float xx, float yy, float spd, int hhealth) {
     this.pos.x = xx;
     this.pos.y = yy;
