@@ -133,8 +133,8 @@ void draw() {
         background(255, 255, 255);
         fill(255, 0, 0);
         john.play();
-        text("killcount:"+killcount, 100, 150);
-        text("Level:"+level, 100, 250);
+        text("Kill Count: "+killcount, 80, 150);
+        text("Level: "+level, 80, 250);
       }
     }
   }
