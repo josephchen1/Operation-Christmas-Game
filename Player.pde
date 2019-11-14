@@ -9,6 +9,8 @@ class Player {
   private float Pradius =50;
   boolean hit;
   boolean dead;
+  int ammo = 20;
+  int energy = 100;
   
   public Player (float xx, float yy, float spd, int hhealth) {
     this.pos.x = xx;
@@ -25,7 +27,8 @@ class Player {
     ellipse(this.pos.x,this.pos.y,Pradius,Pradius);
     ellipse(this.pos.x-20,this.pos.y,20,20);
     ellipse(this.pos.x+20,this.pos.y,20,20);
-    
+    text("Ammo:"+ammo, 100,100);
+    text("Energy:"+energy,100,200);
     for (int i = 0; i < projectiles.size(); i ++) {
         projectiles.get(i).display();
         projectiles.get(i).move();
@@ -64,6 +67,23 @@ class Player {
     }
   }
   
+  public void slowmotion(){
+    if (keyPressed && energy>0){ 
+      if (key == 'q' || key == 'Q') {
+        delay(100);
+        energy--;
+      }
+    }
+  }
+  
+  public void reload(){
+    if (keyPressed){ 
+      if (key == 'r' || key == 'R') {
+        ammo = 20;
+      }
+    }
+  }
+      
 
   void move () { 
   if (keyPressed && (key=='w' || key=='a' || key=='s' || key=='d')){
@@ -82,9 +102,10 @@ class Player {
   
   
   public void shoot(){
-    if(dead==false&&shootdelay==true){
+    if(dead==false&&shootdelay==true&&ammo>0){
       projectiles.add(new Projectile(this.pos.x, this.pos.y));
       shootdelay=false;
+      ammo--;
     }
   }
   
@@ -118,6 +139,8 @@ class Player {
   display();
   shoot();
   die();
+  reload();
+  slowmotion();
   
 }
 
