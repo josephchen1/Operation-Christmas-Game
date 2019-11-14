@@ -3,22 +3,24 @@ PImage ground;
 PImage ground2;
 PImage ground3;
 int level;
-Player john = new Player(800, 500, 5, 100);
+Player john = new Player(800, 500, 1, 100);
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 ArrayList<Zombie> zombies = new ArrayList<Zombie> ();
 ArrayList<Barrel> barrels = new ArrayList<Barrel>();
 float x = 500;
 float y = 500;
 boolean shootdelay = false;
+int killcount=0;
 
 Snow[] flakes = new Snow[300];
 
 void setup() {
-  level = 1;
-  //fullScreen();
-  size(1200,800);
+  level = -1;
+  fullScreen();
+  //size(1200,800);
   startscreen = loadImage("santa.jpg");
   image(startscreen, 0, 0, width, height);
+
   
     for (int i = 0; i<flakes.length; i++) { 
     flakes[i] = new Snow(random(2, 10));
@@ -39,6 +41,7 @@ void draw() {
         float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
           if (distance < (zombies.get(y).radius/2 + 10)) {
             zombies.remove(y);
+            killcount ++;
           }
         }
     }
@@ -56,7 +59,7 @@ void draw() {
   
   if (mousePressed==true && mouseX>width-30 && mouseX<width && mouseY>0 && mouseY<30) {
     System.out.println("true");
-    level = 1;
+    level = -1;
     background (0);
     fullScreen();
     startscreen = loadImage("santa.jpg");
@@ -65,7 +68,8 @@ void draw() {
   
 
   
-  if (level==1) {
+  if (level==-1) {
+
     background(0);
       //startscreen = loadImage("santa.jpg");
       //image(startscreen, 0, 0, width, height);
@@ -91,99 +95,41 @@ void draw() {
   
     // if key is pressed, then it goes into game
     if (mouseX>225 && mouseX<975 && mouseY>435 && mouseY<535 && mousePressed==true) {
-      level=2;
+      level=0;
     }
     if (mouseX>225 && mouseX<975 && mouseY>535 && mouseY<635 && mousePressed==true) {
-      level=10;
+      level=9;
     }
     if (mouseX>225 && mouseX<975 && mouseY>635 && mouseY<735 && mousePressed==true) {
-      level=20;
+      level=19;
     }
   }
-
-  if (level==2) {
+if (level>-1){
+for(int l = 0;l<100;l++){
+  if (level==l) {
     if (zombies.size()==0) {
-      for (int i= 0;i<10; i++){ //Creates 10 enemies
+      level+=1;
+      for (int i= 0;i<level; i++){ //Creates 5l enemies
          zombies.add(new Zombie(random(0,100), random(height), 1, 1, 100));}
-      for (int x= 0;x<10; x++){ //Creates 10 enemies
+      for (int x= 0;x<level; x++){ //Creates 5l enemies
          zombies.add(new Zombie(random(width-100,width), random(height), 1, 1, 100));}
-      for (int j= 0;j<10; j++){ //Creates 10 enemies
+      for (int j= 0;j<level; j++){ //Creates 5l enemies
          zombies.add(new Zombie(random(width), random(height-100,height), 1, 1, 100));}
-      for (int k= 0;k<10; k++){ //Creates 10 enemies
+      for (int k= 0;k<level; k++){ //Creates 5l enemies
          zombies.add(new Zombie(random(width), random(0,100), 1, 1, 100));}
     }
     if (barrels.size()==0) {
-      for (int l = 0; l<5; l++) {
+      for (int b = 0; b<5; b++) {
         barrels.add(new Barrel(random(width),random(height),50));
       }
     }
     
     background(255,255,255);
-    // loading an image to variable ground
-    //ground = loadImage("land.jpg");
-    ////// loading image "ground" into game
-    ////image(ground, 0, 0, width, height);
-    //background(ground);
     fill(255,0 ,0);
     john.play();
-         
+    text("killcount:"+killcount,100,150);
+    text("Level:"+level,100,250);
     } 
-    
-    
-  
-  
-  if (level==10) {
-      if (zombies.size()==0) {
-      for (int i= 0;i<100; i++){ //Creates 10 enemies
-         zombies.add(new Zombie(random(0,100), random(height), 1, 1, 100));}
-      for (int x= 0;x<100; x++){ //Creates 10 enemies
-         zombies.add(new Zombie(random(width-100,width), random(height), 1, 1, 100));}
-      for (int j= 0;j<100; j++){ //Creates 10 enemies
-         zombies.add(new Zombie(random(width), random(height-100,height), 1, 1, 100));}
-      for (int k= 0;k<100; k++){ //Creates 10 enemies
-         zombies.add(new Zombie(random(width), random(0,100), 1, 1, 100));}
-    }
-    if (barrels.size()==0) {
-      for (int l = 0; l<10; l++) {
-        barrels.add(new Barrel(random(width),random(height),50));
-      }
-    }
-    
-    background(255,255,255);
-    // loading an image to variable ground
-    //ground = loadImage("land.jpg");
-    ////// loading image "ground" into game
-    ////image(ground, 0, 0, width, height);
-    //background(ground);
-    fill(255,0 ,0);
-    john.play();
-         
-    } 
-    
-  if (level==20) {
-      if (zombies.size()==0) {
-      for (int i= 0;i<1000; i++){ //Creates 10 enemies
-         zombies.add(new Zombie(random(0,100), random(height), 1, 1, 100));}
-      for (int x= 0;x<1000; x++){ //Creates 10 enemies
-         zombies.add(new Zombie(random(width-100,width), random(height), 1, 1, 100));}
-      for (int j= 0;j<1000; j++){ //Creates 10 enemies
-         zombies.add(new Zombie(random(width), random(height-100,height), 1, 1, 100));}
-      for (int k= 0;k<1000; k++){ //Creates 10 enemies
-         zombies.add(new Zombie(random(width), random(0,100), 1, 1, 100));}
-    }
-    if (barrels.size()==0) {
-      for (int l = 0; l<5; l++) {
-        barrels.add(new Barrel(random(width),random(height),50));
-      }
-    }
-    
-    background(255,255,255);
-    // loading an image to variable ground
-    //ground = loadImage("land.jpg");
-    ////// loading image "ground" into game
-    ////image(ground, 0, 0, width, height);
-    //background(ground);
-    fill(255,0 ,0);
-    john.play();    
-    } 
+}
+}
 }
