@@ -9,6 +9,7 @@ ArrayList<Zombie> zombies = new ArrayList<Zombie> ();
 ArrayList<Barrel> barrels = new ArrayList<Barrel>();
 float x = 500;
 float y = 500;
+boolean shootdelay = false;
 
 Snow[] flakes = new Snow[300];
 
@@ -26,6 +27,10 @@ void setup() {
   
 }
 
+void mouseReleased() {
+  shootdelay=true;
+  System.out.println("released");
+}
 
 void draw() {
   for (int x = 0; x<projectiles.size(); x++) {
