@@ -2,32 +2,58 @@ PImage startscreen;
 PImage ground;
 PImage ground2;
 PImage ground3;
+boolean up, down, left, right;
 int level;
-Player john = new Player(800, 500, 1, 100);
+Player john = new Player(800, 500, 3, 100);
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 ArrayList<Zombie> zombies = new ArrayList<Zombie> ();
 ArrayList<Barrel> barrels = new ArrayList<Barrel>();
+ArrayList<AmmoCrate> crates = new ArrayList<AmmoCrate>();
 float x = 500;
 float y = 500;
 boolean shootdelay = false;
 int killcount=0;
+int ammoreload = 0;
 
 Snow[] flakes = new Snow[300];
-
 void setup() {
   level = -1;
-
-  size(1200,800);
+  size(1200, 800);
   startscreen = loadImage("santa.jpg");
-
-
-
   for (int i = 0; i<flakes.length; i++) { 
     flakes[i] = new Snow(random(2, 10));
     flakes[i].spreadY(i);
   }
 }
+void keyPressed() {
+  if (key=='w'||key=='W') {
+    up = true;
+  }
+  if (key=='a'||key=='A') {
+    left = true;
+  }
+  if (key=='s'||key=='S') {
+    down = true;
+  } 
+  if (key=='d'||key=='D') {
+    right = true;
+  }
+}
 
+void keyReleased() {
+  if (key=='w'||key=='W') {
+    up = false;
+  }
+  if (key=='a'||key=='A') {
+    left = false;
+  }
+  if (key=='s'||key=='S') {
+    down = false;
+  } 
+  if (key=='d'||key=='D') {
+    right = false;
+  }
+}
 void mouseReleased() {
   shootdelay=true;
 }
@@ -38,7 +64,7 @@ void draw() {
       float distance_x = zombies.get(y).x - projectiles.get(x).x;
       float distance_y = zombies.get(y).y - projectiles.get(x).y;
       float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
-      if (distance < (zombies.get(y).radius/2 + 10)) {
+      if (distance < (zombies.get(y).radius/2 + projectiles.get(x).size/2)) {
         zombies.remove(y);
         killcount ++;
       }
@@ -49,13 +75,18 @@ void draw() {
       float distance_x = barrels.get(y).x - projectiles.get(x).x;
       float distance_y = barrels.get(y).y - projectiles.get(x).y;
       float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
-      if (distance < (25 + 10)) {
+      if (distance < (barrels.get(y).radius/2 + projectiles.get(x).size/2)) {
         barrels.get(y).explode(barrels.get(y).x, barrels.get(y).y);
         barrels.remove(y);
       }
     }
   }
-
+  for (int i = 0; i<crates.size(); i++) {
+    if (john.overlap(crates.get(i))) {
+      john.ammo+=10;
+      crates.remove(i);
+    }
+  }
   if (mousePressed==true && mouseX>width-30 && mouseX<width && mouseY>0 && mouseY<30) {
     System.out.println("true");
     level = -1;
@@ -94,8 +125,6 @@ void draw() {
       }
     }
 
-
-    // if key is pressed, then it goes into game
     if (mouseX>225 && mouseX<975 && mouseY>435 && mouseY<535 && mousePressed==true) {
       level=0;
     }
@@ -109,30 +138,36 @@ void draw() {
   if (level>-1) {
     for (int l = 0; l<100; l++) {
       if (level==l) {
-        if (zombies.size()==0) {
-          level+=1;
-          for (int i= 0; i<level; i++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(0, 100), random(height), 1, 1, 100));
+        if (zombies.size()==0&&john.health>0) {
+          crates.clear();
+          barrels.clear();
+          for (int c = 0; c<5; c++) {
+            crates.add(new AmmoCrate(random(width), random(height)));
           }
-          for (int x= 0; x<level; x++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(width-100, width), random(height), 1, 1, 100));
-          }
-          for (int j= 0; j<level; j++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(width), random(height-100, height), 1, 1, 100));
-          }
-          for (int k= 0; k<level; k++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(width), random(0, 100), 1, 1, 100));
-          }
-        }
-        if (barrels.size()==0) {
           for (int b = 0; b<5; b++) {
             barrels.add(new Barrel(random(width), random(height), 50));
+          }
+          level+=1;
+          for (int i= 0; i<level; i++) { //Creates 5l enemies
+            zombies.add(new Zombie(random(-100, 0), random(height), random(1+0.1*level,3+0.1*level)));
+          }
+          for (int x= 0; x<level; x++) { //Creates 5l enemies
+            zombies.add(new Zombie(random(width+100, width), random(height), random(1+0.1*level,3+0.1*level)));
+          }
+          for (int j= 0; j<level; j++) { //Creates 5l enemies
+            zombies.add(new Zombie(random(width), random(height+100, height), random(1+0.1*level,3+0.1*level)));
+          }
+          for (int k= 0; k<level; k++) { //Creates 5l enemies
+            zombies.add(new Zombie(random(width), random(-100, 0), random(1+0.1*level,3+0.1*level)));
           }
         }
 
         background(255, 255, 255);
         fill(255, 0, 0);
         john.play();
+        if (john.health<=0) {
+          zombies.clear();
+        }
         text("Kill Count: "+killcount, 80, 150);
         text("Level: "+level, 80, 250);
       }
