@@ -178,7 +178,8 @@ class Player {
       pos.y = 400; 
       pos.x = 600; 
       killcount = 0;
-      ammo = 0;
+      ammo = 20;
+      energy = 100;
       }
     }
   }
