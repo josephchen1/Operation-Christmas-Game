@@ -164,12 +164,12 @@ class Player {
       dead = true;
       text("WASTED", width/2, height/2,-30);
       rectMode(CENTER);
-      textSize(50);
+      textSize(25);
       textAlign(CENTER);
-      rect(600, 785, 750, 100);
+      rect(600, 750, 750, 50);
       fill(0, 0, 0);
-      text("Respawn", 600, 800);
-      if (mouseX>225 && mouseX<975 && mouseY>735 && mouseY<835 && mousePressed==true) {
+      text("Respawn", 600, 750);
+      if (mouseX>225 && mouseX<975 && mouseY>735 && mouseY<800 && mousePressed==true) {
       level=-1;
       health = 100;
       dead = false;
