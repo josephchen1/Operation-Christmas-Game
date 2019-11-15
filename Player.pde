@@ -164,7 +164,20 @@ class Player {
 
       health = 0; 
       dead = true;
-      text("WASTED", width/2, height/2);
+      text("WASTED", width/2, height/2,-30);
+      rectMode(CENTER);
+      textSize(50);
+      textAlign(CENTER);
+      rect(600, 785, 750, 100);
+      fill(0, 0, 0);
+      text("Respawn", 600, 800);
+      if (mouseX>225 && mouseX<975 && mouseY>735 && mouseY<835 && mousePressed==true) {
+      level=-1;
+      health = 100;
+      dead = false;
+      pos.y = 400; 
+      pos.x = 600; 
+      }
     }
   }
 }
