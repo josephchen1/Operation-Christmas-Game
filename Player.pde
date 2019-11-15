@@ -46,8 +46,11 @@ class Player {
     for (int z = 0; z < barrels.size(); z ++) {
       barrels.get(z).display();
     }
+    for (int i = 0; i < crates.size(); i ++) {
+      crates.get(i).display();
+    }
 
-    fill(173,255,47);
+    fill(173, 255, 47);
     rectMode(CORNER);
     rect(12*health-1200, 0, 1200, 50);
     fill(0);
@@ -80,38 +83,35 @@ class Player {
   }
 
   public void reload() {
-    if (keyPressed) { 
+    if (keyPressed && ammoreload>0) { 
       if (key == 'r' || key == 'R') {
         ammo = 20;
+        ammoreload--;
       }
     }
   }
 
 
   void move () { 
-    if (keyPressed && (key=='w' || key=='a' || key=='s' || key=='d')) {
-      if (key == 'w') { 
-        velocity.y -= speed;
-      }
-      if (key == 'a') { 
-        velocity.x -= speed;
-      }
-      if (key == 's') { 
-        velocity.y += speed;
-      }
-      if (key == 'd') { 
-        velocity.x += speed;
-      }
-      pos.add(velocity);
-      velocity.mult(0.9);
+    if (up) { 
+      pos.y -= speed;
     }
+    if (left) { 
+      pos.x -= speed;
+    }
+    if (down) { 
+      pos.y += speed;
+    }
+    if (right) { 
+      pos.x += speed;
+    }
+
     if (health <=0) {
       textSize(200);
       fill(196, 24, 24);
       textSize(230);
       die();
     }
-
     teleport();
   }
 
@@ -130,20 +130,18 @@ class Player {
     float distance_y = other.y - pos.y;
 
     float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
-    if (distance < (other.radius + Pradius)) {
+    if (distance < (other.radius/2 + Pradius/2)) {
       health -= 10;
       hit = true;
     } else
       hit = false;
   }
 
-  public boolean overlap(Barrel other) {
-
-    float distance_x = other.x - x;
-    float distance_y = other.y - y;
-
+  public boolean overlap(AmmoCrate other) {
+    float distance_x = other.x - pos.x;
+    float distance_y = other.y - pos.y;
     float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
-    if (distance < (other.radius + Pradius)) {
+    if (distance < (other.size/2 + Pradius/2)) {
       return true;
     } else {
       return false;
@@ -166,8 +164,7 @@ class Player {
 
       health = 0; 
       dead = true;
-      text("WASTED", width/2, height/2); 
-      
+      text("WASTED", width/2, height/2);
     }
   }
 }
