@@ -6,17 +6,17 @@ class Projectile {
 
   //Constructor
   Projectile(float xx, float yy) {
-    speed = 50;
+    speed = 20;
     size = 20;
     x = xx;
     y = yy;
     float dx = speed*cos(angle);
     float dy = speed*sin(angle);
     destroy = false;
-    
+
     float xDiff = mouseX - x;
     float yDiff = mouseY - y;
-    angle = atan2(yDiff,xDiff);
+    angle = atan2(yDiff, xDiff);
   }
 
   void display() {
