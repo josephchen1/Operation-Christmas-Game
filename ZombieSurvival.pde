@@ -167,6 +167,8 @@ void draw() {
         john.play();
         if (john.health<=0) {
           zombies.clear();
+          crates.clear();
+          barrels.clear();
         }
         text("Kill Count: "+killcount, 80, 150);
         text("Level: "+level, 80, 250);
