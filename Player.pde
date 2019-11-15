@@ -1,6 +1,4 @@
 class Player {
-  private float x;
-  private float y;
   private float speed;
   private int health=100;
   PVector pos = new PVector();
