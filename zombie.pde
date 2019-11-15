@@ -1,38 +1,45 @@
 class Zombie {
   float x;
   float y;
-  float dx = random(.1, .9);
-  float dy = random(.1, .9);
   float health;
   float radius = 20;
-  
-  Zombie(float xx, float yy, float ddx, float ddy, float hhealth){
+  float speed;
+
+
+  Zombie(float xx, float yy, float spd) {
     x = xx;
     y = yy;
-    dx = ddx;
-    dy = ddy;
-    health = hhealth;   
+    speed = spd;
   }
-  
+
   void display() {
     fill(0);
-    ellipse (x,y,radius,radius);
+    ellipse (x, y, radius, radius);
   }
-  
+
   public void update() {
     for (int i = 0; i < zombies.size(); i ++) {
-        zombies.get(i).display();
-        zombies.get(i).move(john);
+      zombies.get(i).display();
+      zombies.get(i).move(john);
     }
   }
-  void move(Player player){
-    x += 0.01*dx;
-    y += 0.01*dy;
+  
+  void move(Player player) {
     float xDiff = x - player.pos.x;
     float yDiff = y - player.pos.y;
-    float distance = sqrt(xDiff*xDiff+yDiff*yDiff);
-    float angle = atan2(yDiff,xDiff);
-    dx -= cos(angle);
-    dy -= sin(angle);
-  }  
+    float angle = atan2(yDiff, xDiff);
+    x -= cos(angle)*speed;
+    y -= sin(angle)*speed;
+    
+      
+      
+  
+
+    //x -= 10*(1/xDiff);
+    //y -= 10*(1/yDiff);
+    //float distance = sqrt(xDiff*xDiff+yDiff*yDiff);
+    //float angle = atan2(yDiff, xDiff);
+    //dx -= cos(angle);
+    //dy -= sin(angle)
+  }
 }
