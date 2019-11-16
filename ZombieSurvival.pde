@@ -141,6 +141,7 @@ void draw() {
         if (zombies.size()==0&&john.health>0) {
           crates.clear();
           barrels.clear();
+          projectiles.clear();
           for (int c = 0; c<5; c++) {
             crates.add(new AmmoCrate(random(width), random(height)));
           }
