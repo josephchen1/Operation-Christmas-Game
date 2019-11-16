@@ -48,9 +48,9 @@ class Player {
       crates.get(i).display();
     }
 
-    fill(173, 255, 47);
+    fill(255, 25, 47);
     rectMode(CORNER);
-    rect(12*health-1200, 0, 1200, 50);
+    rect(12*health-1200, 0, 1200, 5);
     fill(0);
     text("Health: "+health, 80, 30);//health bar
   }
