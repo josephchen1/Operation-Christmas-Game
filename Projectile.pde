@@ -5,11 +5,13 @@ class Projectile {
   boolean destroy;
 
   //Constructor
-  Projectile(float xx, float yy) {
+  Projectile(float xx, float yy, float s) {
     speed = 20;
-    size = 20;
+    size = s;
     x = xx;
     y = yy;
+    float dx = speed*cos(angle);
+    float dy = speed*sin(angle);
     destroy = false;
 
     float xDiff = mouseX - x;
