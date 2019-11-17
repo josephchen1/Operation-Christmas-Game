@@ -10,8 +10,6 @@ class Projectile {
     size = 20;
     x = xx;
     y = yy;
-    float dx = speed*cos(angle);
-    float dy = speed*sin(angle);
     destroy = false;
 
     float xDiff = mouseX - x;
