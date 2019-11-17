@@ -86,7 +86,7 @@ void draw() {
     p.disappear();
   }
 
-  for (int x = 0; x<projectiles.size(); x++) {//projectile collision with zombies
+  for (int x = 0; x<projectiles.size(); x++) {
     for (int y = 0; y<zombies.size(); y++) {
       float distance_x = zombies.get(y).x - projectiles.get(x).x;
       float distance_y = zombies.get(y).y - projectiles.get(x).y;
@@ -97,7 +97,7 @@ void draw() {
       }
     }
   }
-  for (int x = 0; x<projectiles.size(); x++) {//projectile collision with barrels
+  for (int x = 0; x<projectiles.size(); x++) {
     for (int y = 0; y<barrels.size(); y++) {
       float distance_x = barrels.get(y).x - projectiles.get(x).x;
       float distance_y = barrels.get(y).y - projectiles.get(x).y;
@@ -112,7 +112,7 @@ void draw() {
       }
     }
   }
-  for (int i = 0; i<crates.size(); i++) {//player gets ammo if overlapping with crate and crate disapears
+  for (int i = 0; i<crates.size(); i++) {
     if (john.overlap(crates.get(i))) {
       john.ammo+=10;
       crates.remove(i);
@@ -224,8 +224,12 @@ void draw() {
           barrels.clear();
         }
         text("Kill Count: "+killcount, 80, 150);
-        text("Level: "+level, 80, 250);
+        text("Money: "+john.money, 80, 250);
+        text("Level: "+level, 80, 300);
+        text("Bullet Upgrade: "+john.bulletupgrade, 80, 350);
+        text("Speed Upgrade: "+john.speedupgrade, 80, 400);
       }
     }
   }
 }
+
