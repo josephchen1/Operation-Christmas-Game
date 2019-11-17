@@ -80,15 +80,6 @@ class Player {
     }
   }
 
-  public void reload() {
-    if (keyPressed && ammoreload>0) { 
-      if (key == 'r' || key == 'R') {
-        ammo = 20;
-        ammoreload--;
-      }
-    }
-  }
-
 
   void move () { 
     if (up) { 
