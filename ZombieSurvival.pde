@@ -1,4 +1,7 @@
 PImage startscreen;
+PImage ground;
+PImage ground2;
+PImage ground3;
 boolean up, down, left, right;
 int level;
 Player john = new Player(800, 500, 3, 100);
