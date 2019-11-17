@@ -141,7 +141,6 @@ class Player {
     move();
     display();
     shoot();
-    reload();
     slowmotion();
   }
 
