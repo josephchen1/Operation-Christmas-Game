@@ -1,4 +1,5 @@
 class Player {
+  public int money = 0;
   private float speed;
   private int health=100;
   PVector pos = new PVector();
@@ -8,7 +9,10 @@ class Player {
   boolean hit;
   boolean dead;
   int ammo = 20;
-  int energy = 100;
+  float energy = 100;
+  float size = 20;
+  int bulletupgrade = 0;
+  int speedupgrade = 0;
 
   public Player (float xx, float yy, float spd, int hhealth) {
     this.pos.x = xx;
@@ -27,7 +31,7 @@ class Player {
     ellipse(this.pos.x+20, this.pos.y, 20, 20);
     textSize(20);
     text("Ammo: "+ammo, 80, 100);
-    text("Energy: "+energy, 80, 200);
+    text("Energy: "+(int)energy, 80, 200);
     for (int i = 0; i < projectiles.size(); i ++) {
       projectiles.get(i).display();
       projectiles.get(i).move();
@@ -107,7 +111,7 @@ class Player {
 
   public void shoot() {
     if (dead==false&&shootdelay==true&&ammo>0) {
-      projectiles.add(new Projectile(this.pos.x, this.pos.y));
+      projectiles.add(new Projectile(this.pos.x, this.pos.y, size));
       shootdelay=false;
       ammo--;
     }
@@ -142,17 +146,34 @@ class Player {
     display();
     shoot();
     slowmotion();
+    keyPressed();
   }
 
+  public void keyPressed() {
+    if (money >= 10 && (key=='R'||key=='r')) {
+      money-=10;
+      john.speed+=0.1;
+      speedupgrade++;
+    }
+     if (money >= 30 && (key=='E'||key=='e')) {
+      money-=30;
+      john.health=100;
+     }
+      if (money >= 10 && (key=='F'||key=='f')) {
+      money-=10;
+      john.size+=5;
+      bulletupgrade++;
+      }
+  }
 
-  public void die() {//player disappears after death and "Wasted comes on screen" with a respawn button
+  public void die() {
     if (health <= 0) {
       pos.y = -100000000; 
       pos.x = -100000000; 
 
       health = 0; 
       dead = true;
-      text("WASTED", width/2, height/2,-30);
+      text("WASTED", width/2, height/2, -30);
       rectMode(CENTER);
       textSize(25);
       textAlign(CENTER);
@@ -160,14 +181,14 @@ class Player {
       fill(0, 0, 0);
       text("Respawn", 600, 750);
       if (mouseX>225 && mouseX<975 && mouseY>735 && mouseY<800 && mousePressed==true) {
-      level=-1;
-      health = 100;
-      dead = false;
-      pos.y = 400; 
-      pos.x = 600; 
-      killcount = 0;
-      ammo = 20;
-      energy = 100;
+        level=-1;
+        health = 100;
+        dead = false;
+        pos.y = 400; 
+        pos.x = 600; 
+        killcount = 0;
+        ammo = 20;
+        energy = 100;
       }
     }
   }
