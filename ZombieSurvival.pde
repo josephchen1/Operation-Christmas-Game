@@ -22,7 +22,7 @@ void setup() {
     flakes[i].spreadY(i);
   }
 }
-void keyPressed() {
+void keyPressed() {//movement in direction is true until key released
   if (key=='w'||key=='W') {
     up = true;
   }
@@ -56,7 +56,7 @@ void mouseReleased() {
 }
 
 void draw() {
-  for (int x = 0; x<projectiles.size(); x++) {
+  for (int x = 0; x<projectiles.size(); x++) {//projectile collision with zombies
     for (int y = 0; y<zombies.size(); y++) {
       float distance_x = zombies.get(y).x - projectiles.get(x).x;
       float distance_y = zombies.get(y).y - projectiles.get(x).y;
@@ -67,7 +67,7 @@ void draw() {
       }
     }
   }
-  for (int x = 0; x<projectiles.size(); x++) {
+  for (int x = 0; x<projectiles.size(); x++) {//projectile collision with barrels
     for (int y = 0; y<barrels.size(); y++) {
       float distance_x = barrels.get(y).x - projectiles.get(x).x;
       float distance_y = barrels.get(y).y - projectiles.get(x).y;
@@ -78,7 +78,7 @@ void draw() {
       }
     }
   }
-  for (int i = 0; i<crates.size(); i++) {
+  for (int i = 0; i<crates.size(); i++) {//player gets ammo if overlapping with crate and crate disapears
     if (john.overlap(crates.get(i))) {
       john.ammo+=10;
       crates.remove(i);
