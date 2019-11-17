@@ -1,4 +1,11 @@
-PImage startscreen;
+PImage grinch1;
+PImage original;
+PImage grinch2;
+PImage grinch3;
+PImage grinch4;
+boolean pic1 = false;
+boolean pic2 = false;
+boolean pic3 = false;
 PImage ground;
 PImage ground2;
 PImage ground3;
@@ -14,18 +21,26 @@ float y = 500;
 boolean shootdelay = false;
 int killcount=0;
 int ammoreload = 0;
+ArrayList<Particle> explosion = new ArrayList<Particle>();
+int MAX = 80;
+PImage expl;
+
 
 Snow[] flakes = new Snow[300];
 void setup() {
   level = -1;
-  size(1200, 800);
-  startscreen = loadImage("santa.jpg");
+  size(1080, 720);
+  grinch1 = loadImage("grinch1.png");
+  grinch2 = loadImage("grinch2.png");
+  grinch3 = loadImage("grinch3.png");
+  grinch4 = loadImage("grinch4.png");
+  original = loadImage("grinch1.png");
   for (int i = 0; i<flakes.length; i++) { 
     flakes[i] = new Snow(random(2, 10));
     flakes[i].spreadY(i);
   }
 }
-void keyPressed() {//movement in direction is true until key released
+void keyPressed() {
   if (key=='w'||key=='W') {
     up = true;
   }
@@ -59,7 +74,19 @@ void mouseReleased() {
 }
 
 void draw() {
-  for (int x = 0; x<projectiles.size(); x++) {//projectile collision with zombies
+  if (john.energy < 100) {
+    john.energy += 0.01;
+  }
+  background (0);
+  for (int i = 0; i < explosion.size(); i++) {
+    Particle p = (Particle) explosion.get(i); 
+    p.run();
+    p.update();
+    p.acceleration();
+    p.disappear();
+  }
+
+  for (int x = 0; x<projectiles.size(); x++) {
     for (int y = 0; y<zombies.size(); y++) {
       float distance_x = zombies.get(y).x - projectiles.get(x).x;
       float distance_y = zombies.get(y).y - projectiles.get(x).y;
@@ -70,18 +97,22 @@ void draw() {
       }
     }
   }
-  for (int x = 0; x<projectiles.size(); x++) {//projectile collision with barrels
+  for (int x = 0; x<projectiles.size(); x++) {
     for (int y = 0; y<barrels.size(); y++) {
       float distance_x = barrels.get(y).x - projectiles.get(x).x;
       float distance_y = barrels.get(y).y - projectiles.get(x).y;
       float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
       if (distance < (barrels.get(y).radius/2 + projectiles.get(x).size/2)) {
+        background(0);
+        for (int i = 0; i < MAX; i ++) {
+          explosion.add(new Particle(barrels.get(y).x, barrels.get(y).y));
+        }
         barrels.get(y).explode(barrels.get(y).x, barrels.get(y).y);
         barrels.remove(y);
       }
     }
   }
-  for (int i = 0; i<crates.size(); i++) {//player gets ammo if overlapping with crate and crate disapears
+  for (int i = 0; i<crates.size(); i++) {
     if (john.overlap(crates.get(i))) {
       john.ammo+=10;
       crates.remove(i);
@@ -92,8 +123,14 @@ void draw() {
     level = -1;
     background (0);
     fullScreen();
-    startscreen = loadImage("santa.jpg");
-    image(startscreen, 0, 0, width, height);
+    grinch1 = loadImage("grinch1.png");
+    grinch2 = loadImage("grinch2.png");
+    grinch3 = loadImage("grinch3.png");
+    grinch4 = loadImage("grinch4.png");
+    image(grinch1, 0, 0, width, height);
+    image(grinch2, 0, 0, width, height);
+    image(grinch3, 0, 0, width, height);
+    image(grinch4, 0, 0, width, height);
   }
 
 
@@ -101,22 +138,12 @@ void draw() {
   if (level==-1) {
 
     background(0);
-    background(startscreen);
-    //startscreen = loadImage("santa.jpg");
+    background(grinch1);
+    fill(100, 100, 100, 100);
+
+
+    //startscreen = loadImage("santa.png");
     //image(startscreen, 0, 0, width, height);
-    textSize(50);
-    textAlign(CENTER);
-    fill(0, 0, 0);
-    rectMode(CENTER);
-    fill(200, 200);
-    rect(600, 485, 750, 100);
-    rect(600, 585, 750, 100);
-    rect(600, 685, 750, 100);
-    fill(0, 0, 0);
-    text("ZOMBIE SURVIVAL", 600, 400);
-    text("EASY MODE", 600, 500);
-    text("MEDIUM MODE", 600, 600);
-    text("HARD MODE", 600, 700);
 
     for (int i = 0; i < flakes.length; i++) {
       flakes[i] .display();
@@ -125,16 +152,41 @@ void draw() {
       }
     }
 
-    if (mouseX>225 && mouseX<975 && mouseY>435 && mouseY<535 && mousePressed==true) {
-      level=0;
+    if (mouseX>70 && mouseX<380 && mouseY>430 && mouseY<485) {
+      grinch1=grinch2;
+    } else {
+      grinch1=original;
     }
-    if (mouseX>225 && mouseX<975 && mouseY>535 && mouseY<635 && mousePressed==true) {
-      level=9;
+
+    if (mouseX>70 && mouseX<380 && mouseY>430 && mouseY<485 && mousePressed ==true) {
+      level = 0;
     }
-    if (mouseX>225 && mouseX<975 && mouseY>635 && mouseY<735 && mousePressed==true) {
-      level=19;
+
+    //------------------------------------------------------------------------------------------
+
+    if (mouseX>70 && mouseX<500 && mouseY>492 && mouseY<554) {
+      grinch1=grinch3;
+    }
+
+    if (mouseX>70 && mouseX<500 && mouseY>492 && mouseY<554 && mousePressed ==true) {
+      level = 9;
+    }
+
+    //------------------------------------------------------------------------------------------
+
+    if (mouseX>70 && mouseX<380 && mouseY>544 && mouseY<606) {
+      grinch1=grinch4;
+      System.out.println("hi");
+    }
+
+    if (mouseX>70 && mouseX<380 && mouseY>544 && mouseY<606 && mousePressed ==true) {
+      level = 19;
     }
   }
+
+  //------------------------------------------------------------------------------------------
+
+
   if (level>-1) {
     for (int l = 0; l<100; l++) {
       if (level==l) {
@@ -150,16 +202,16 @@ void draw() {
           }
           level+=1;
           for (int i= 0; i<level; i++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(-100, 0), random(height), random(1+0.1*level,3+0.1*level)));
+            zombies.add(new Zombie(random(-100, 0), random(height), random(1+0.1*level, 3+0.1*level)));
           }
           for (int x= 0; x<level; x++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(width+100, width), random(height), random(1+0.1*level,3+0.1*level)));
+            zombies.add(new Zombie(random(width+100, width), random(height), random(1+0.1*level, 3+0.1*level)));
           }
           for (int j= 0; j<level; j++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(width), random(height+100, height), random(1+0.1*level,3+0.1*level)));
+            zombies.add(new Zombie(random(width), random(height+100, height), random(1+0.1*level, 3+0.1*level)));
           }
           for (int k= 0; k<level; k++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(width), random(-100, 0), random(1+0.1*level,3+0.1*level)));
+            zombies.add(new Zombie(random(width), random(-100, 0), random(1+0.1*level, 3+0.1*level)));
           }
         }
 
