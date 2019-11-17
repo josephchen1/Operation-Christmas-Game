@@ -155,7 +155,7 @@ class Player {
   }
 
 
-  public void die() {
+  public void die() {//player disappears after death and "Wasted comes on screen" with a respawn button
     if (health <= 0) {
       pos.y = -100000000; 
       pos.x = -100000000; 
