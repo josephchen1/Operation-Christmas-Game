@@ -4,7 +4,7 @@ PImage grinch2;
 PImage grinch3;
 PImage grinch4;
 boolean pic1 = false;
-boolean pic2 = false;
+boolean pic2 = false;  
 boolean pic3 = false;
 PImage ground;
 PImage ground2;
@@ -20,6 +20,7 @@ float x = 500;
 float y = 500;
 boolean shootdelay = false;
 int killcount=0;
+int highscore=0;
 int ammoreload = 0;
 int MAX = 80;
 PImage expl;
@@ -76,6 +77,9 @@ void mouseReleased() {
 }
 
 void draw() {
+  if (killcount>highscore) {
+    highscore = killcount;
+  }
   if (john.energy < 100) {
     john.energy += 0.01;
   }
@@ -217,11 +221,15 @@ void draw() {
           crates.clear();
           barrels.clear();
         }
-        text("Kill Count: "+killcount, 80, 150);
-        text("Money: "+john.money, 80, 250);
-        text("Level: "+level, 80, 300);
-        text("Bullet Upgrade: "+john.bulletupgrade, 80, 350);
-        text("Speed Upgrade: "+john.speedupgrade, 80, 400);
+        textAlign(LEFT);
+        text("Health: "+john.health, 20, 50);//health bar
+        text("Ammo: "+john.ammo, 20, 100);
+        text("Kill Count: "+killcount, 20, 150);
+        text("Energy: "+(int)john.energy, 20, 200);
+        text("Money: "+john.money, 20, 250);
+        text("Level: "+level, 20, 300);
+        text("Bullet Upgrade: "+john.bulletupgrade, 20, 350);
+        text("Speed Upgrade: "+john.speedupgrade, 20, 400);
       }
     }
   }
