@@ -4,18 +4,20 @@ class Grinch {
   float health;
   float radius = 20;
   float speed;
+  PImage img;
+
 
 
   Grinch(float xx, float yy, float spd) {
     x = xx;
     y = yy;
-    speed = spd;
+    speed = spd;        
+    img = loadImage("grinches.png");
+
   }
 
   void display() {
-    noStroke();
-    fill(50,205,50);
-    ellipse (x, y, radius, radius);
+    image (img,x, y);
   }
 
   public void update() {
