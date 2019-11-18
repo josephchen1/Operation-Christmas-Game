@@ -25,7 +25,7 @@ class Player {
 
   public void display() {
     stroke(0);
-    fill(255, 122, 122);
+    fill(255, 10, 14);
     ellipse(this.pos.x, this.pos.y, Pradius, Pradius);
     ellipse(this.pos.x-20, this.pos.y, 20, 20);
     ellipse(this.pos.x+20, this.pos.y, 20, 20);
@@ -177,10 +177,10 @@ class Player {
       rectMode(CENTER);
       textSize(25);
       textAlign(CENTER);
-      rect(600, 750, 750, 50);
+      rect(540, 700, 500, 50);
       fill(0, 0, 0);
-      text("Respawn", 600, 750);
-      if (mouseX>225 && mouseX<975 && mouseY>735 && mouseY<800 && mousePressed==true) {
+      text("Respawn", 540, 700);
+      if (mouseX>290 && mouseX<790 && mouseY>650 && mouseY<750 && mousePressed==true) {
         level=-1;
         health = 100;
         dead = false;
