@@ -1,4 +1,4 @@
-class AmmoCrate {//attributes Ammo crate gives player 10 ammo when player goes over it
+class AmmoCrate {//attributes of Ammo Crate (which gives Player 10 ammo if overlapped)
   public float x;
   public float y;
   public float size = 40;
