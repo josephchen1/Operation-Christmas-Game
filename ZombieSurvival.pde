@@ -6,6 +6,7 @@ PImage grinch4;
 boolean pic1 = false;
 boolean pic2 = false;
 boolean pic3 = false;
+boolean sound1=false;
 PImage ground;
 PImage ground2;
 PImage ground3;
@@ -26,11 +27,15 @@ int MAX = 80;
 PImage expl;
 import processing.sound.*;
 SoundFile meanone;
+SoundFile sleighride;
+
 Snow[] flakes = new Snow[300];
 
 void setup() {
 meanone = new SoundFile(this, "meanone.mp3");
+sleighride = new SoundFile(this, "sleighride.mp3");
 meanone.play();
+
   level = -1;
   size(1080, 720);
   grinch1 = loadImage("grinch1.png");
@@ -80,6 +85,9 @@ void draw() {
   if (john.energy < 100) {
     john.energy += 0.01;
   }
+  
+  if (level!=-1){meanone.stop();}
+  
   background (0);
   for (int i = 0; i < explosion.size(); i++) {
     Particle p = (Particle) explosion.get(i); 
@@ -144,6 +152,7 @@ void draw() {
     background(0);
     background(grinch1);
     fill(100, 100, 100, 100);
+    sound1=true;
 
 
     //startscreen = loadImage("santa.png");
@@ -168,12 +177,12 @@ void draw() {
 
     //------------------------------------------------------------------------------------------
 
-    if (mouseX>70 && mouseX<500 && mouseY>492 && mouseY<554) {
+    if (mouseX>70 && mouseX<485 && mouseY>492 && mouseY<554) {
       grinch1=grinch3;
     }
 
-    if (mouseX>70 && mouseX<500 && mouseY>492 && mouseY<554 && mousePressed ==true) {
-      level = 9;
+    if (mouseX>70 && mouseX<485 && mouseY>492 && mouseY<554 && mousePressed ==true) {
+      level = 5;
     }
 
     //------------------------------------------------------------------------------------------
@@ -183,15 +192,15 @@ void draw() {
       System.out.println("hi");
     }
 
-    if (mouseX>70 && mouseX<380 && mouseY>544 && mouseY<606 && mousePressed ==true) {
-      level = 19;
+    if (mouseX>70 && mouseX<365 && mouseY>544 && mouseY<606 && mousePressed ==true) {
+      level = 10;
     }
   }
 
   //------------------------------------------------------------------------------------------
 
-
   if (level>-1) {
+    
     for (int l = 0; l<100; l++) {
       if (level==l) {
         if (zombies.size()==0&&john.health>0) {
@@ -236,4 +245,3 @@ void draw() {
     }
   }
 }
-
