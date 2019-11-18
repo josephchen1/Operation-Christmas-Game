@@ -1,4 +1,4 @@
-class Snow {
+class Snow {//attributes (snow shows on start screen when you are choosing difficulty and floats down the screen
   float x; 
   float y;
   float alpha;
