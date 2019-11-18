@@ -24,15 +24,17 @@ int highscore=0;
 int ammoreload = 0;
 int MAX = 80;
 PImage expl;
-//import processing.sound.*;
-//SoundFile meanone;
+import processing.sound.*;
+SoundFile meanone;
 Snow[] flakes = new Snow[300];
 
 void setup() {
-  //meanone = new SoundFile(this, "meanone.mp3");
-  //meanone.play();
+  meanone = new SoundFile(this, "meanone.mp3");
+  meanone.play();
+  
   level = -1;
   size(1080, 720);
+  
   grinch1 = loadImage("grinch1.png");
   grinch2 = loadImage("grinch2.png");
   grinch3 = loadImage("grinch3.png");
@@ -166,7 +168,7 @@ void draw() {
     }
 
     if (mouseX>70 && mouseX<500 && mouseY>492 && mouseY<554 && mousePressed ==true) {
-      level = 9;
+      level = 6;
     }
 
     //------------------------------------------------------------------------------------------
@@ -176,7 +178,7 @@ void draw() {
     }
 
     if (mouseX>70 && mouseX<380 && mouseY>544 && mouseY<606 && mousePressed ==true) {
-      level = 19;
+      level = 10;
     }
   }
 
