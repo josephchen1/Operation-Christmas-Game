@@ -1,4 +1,4 @@
-class Player {//attributes
+class Player {//attributes player is santa who is controlled by wasd for movement and mouse click for shooting and aiming
   public int money = 0;
   private float speed;
   private int health=100;
@@ -146,24 +146,24 @@ class Player {//attributes
     keyPressed();
   }
 
-  public void keyPressed() {
-    if (money >= 10 && (key=='R'||key=='r')) {
+  public void keyPressed() {//upgrade system
+    if (money >= 10 && (key=='R'||key=='r')) {//upgrade speed
       money-=10;
       john.speed+=0.1;
       speedupgrade++;
     }
-    if (money >= 30 && (key=='E'||key=='e')) {
+    if (money >= 30 && (key=='E'||key=='e')) {//replenish health
       money-=30;
       john.health=100;
     }
-    if (money >= 10 && (key=='F'||key=='f')) {
+    if (money >= 10 && (key=='F'||key=='f')) {//upgrade bullet size
       money-=10;
       john.size+=5;
       bulletupgrade++;
     }
   }
 
-  public void die() {
+  public void die() {//death takes player off screen shows "Wasted" and gives a respawn option
     if (health <= 0) {
       pos.y = -100000000; 
       pos.x = -100000000; 
