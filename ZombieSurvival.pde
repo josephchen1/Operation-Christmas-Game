@@ -94,6 +94,7 @@ void draw() {
       if (distance < (zombies.get(y).radius/2 + projectiles.get(x).size/2)) {
         zombies.remove(y);
         killcount ++;
+        john.money++;
       }
     }
   }
