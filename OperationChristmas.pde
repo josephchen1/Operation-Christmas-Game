@@ -28,8 +28,8 @@ SoundFile meanone;
 Snow[] flakes = new Snow[300];
 
 void setup() {
-meanone = new SoundFile(this, "meanone.mp3");
-meanone.play();
+  meanone = new SoundFile(this, "meanone.mp3");
+  meanone.play();
   level = -1;
   size(1080, 720);
   grinch1 = loadImage("grinch1.png");
@@ -187,10 +187,11 @@ void draw() {
           crates.clear();
           barrels.clear();
           projectiles.clear();
-          for (int c = 0; c<5; c++) {
+          int spawnrate = (int)(level*0.3);
+          for (int c = 0; c<1+spawnrate; c++) {
             crates.add(new AmmoCrate(random(width), random(height)));
           }
-          for (int b = 0; b<5; b++) {
+          for (int b = 0; b<1+spawnrate; b++) {
             barrels.add(new Barrel(random(width), random(height), 50));
           }
           level+=1;
@@ -225,4 +226,3 @@ void draw() {
     }
   }
 }
-
