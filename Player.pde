@@ -30,8 +30,6 @@ class Player {//attributes
     ellipse(this.pos.x-20, this.pos.y, 20, 20);
     ellipse(this.pos.x+20, this.pos.y, 20, 20);
     textSize(20);
-    text("Ammo: "+ammo, 80, 100);
-    text("Energy: "+(int)energy, 80, 200);
     for (int i = 0; i < projectiles.size(); i ++) {
       projectiles.get(i).display();
       projectiles.get(i).move();
@@ -56,7 +54,6 @@ class Player {//attributes
     rectMode(CORNER); // health bar
     rect(12*health-1200, 0, 1200, 5);
     fill(0);
-    text("Health: "+health, 80, 30);//health bar
   }
 
 
@@ -155,15 +152,15 @@ class Player {//attributes
       john.speed+=0.1;
       speedupgrade++;
     }
-     if (money >= 30 && (key=='E'||key=='e')) {
+    if (money >= 30 && (key=='E'||key=='e')) {
       money-=30;
       john.health=100;
-     }
-      if (money >= 10 && (key=='F'||key=='f')) {
+    }
+    if (money >= 10 && (key=='F'||key=='f')) {
       money-=10;
       john.size+=5;
       bulletupgrade++;
-      }
+    }
   }
 
   public void die() {
@@ -173,15 +170,25 @@ class Player {//attributes
 
       health = 0; 
       dead = true;
+      textAlign(CENTER);
       text("WASTED", width/2, height/2, -30);
       rectMode(CENTER);
       textSize(25);
+      text("YOUR SCORE: "+killcount, width/2, height/2-270);
+      text("HIGHSCORE: "+highscore, width/2, height/2-220);
       textAlign(CENTER);
-      rect(540, 700, 500, 50);
+      fill(169, 169, 169);
+      rect(540, 600, 500, 50);
       fill(0, 0, 0);
-      text("Respawn", 540, 700);
-      if (mouseX>290 && mouseX<790 && mouseY>650 && mouseY<750 && mousePressed==true) {
+      text("Respawn", 540, 610);
+      if (mouseX>290 && mouseX<790 && mouseY>550 && mouseY<650 && mousePressed==true) {
         level=-1;
+        speed=3;
+        bulletupgrade=0;
+        speedupgrade=0;
+        money=0;
+        health=100;
+        size=20;
         health = 100;
         dead = false;
         pos.y = 400; 
