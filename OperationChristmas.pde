@@ -28,7 +28,7 @@ import processing.sound.*;
 SoundFile meanone;
 Snow[] flakes = new Snow[300];
 
-void setup() {
+void setup() { //plays the song "you're a mean one mr. Grinch"
   meanone = new SoundFile(this, "meanone.mp3");
   meanone.play();
   
@@ -40,12 +40,12 @@ void setup() {
   grinch3 = loadImage("grinch3.png");
   grinch4 = loadImage("grinch4.png");
   original = loadImage("grinch1.png");
-  for (int i = 0; i<flakes.length; i++) { 
+  for (int i = 0; i<flakes.length; i++) { //snowflakes on the home screen
     flakes[i] = new Snow(random(2, 10));
     flakes[i].spreadY(i);
   }
 }
-void keyPressed() {
+void keyPressed() {//movement of player with wasd
   if (key=='w'||key=='W') {
     up = true;
   }
@@ -74,20 +74,20 @@ void keyReleased() {
     right = false;
   }
 }
-void mouseReleased() {
+void mouseReleased() {//only allows for semiauto firing
   shootdelay=true;
 }
 
 void draw() {
-  if (killcount>highscore) {
+  if (killcount>highscore) {//saves highscore
     highscore = killcount;
   }
-  if (john.energy < 100) {
+  if (john.energy < 100) {//energy for slowmotion and recharge
     john.energy += 0.01;
   }
   background (0);
 
-  for (int x = 0; x<projectiles.size(); x++) {
+  for (int x = 0; x<projectiles.size(); x++) {//checks overlap for grinches and projectiles, if overlapping it removes the grinch, adds money, and score
     for (int y = 0; y<grinches.size(); y++) {
       float distance_x = grinches.get(y).x - projectiles.get(x).x;
       float distance_y = grinches.get(y).y - projectiles.get(x).y;
@@ -99,7 +99,7 @@ void draw() {
       }
     }
   }
-  for (int x = 0; x<projectiles.size(); x++) {
+  for (int x = 0; x<projectiles.size(); x++) {//checks overlap for barrels and projectiles, if overlapping the barrel will explode
     for (int y = 0; y<barrels.size(); y++) {
       float distance_x = barrels.get(y).x - projectiles.get(x).x;
       float distance_y = barrels.get(y).y - projectiles.get(x).y;
@@ -111,13 +111,13 @@ void draw() {
       }
     }
   }
-  for (int i = 0; i<crates.size(); i++) {
+  for (int i = 0; i<crates.size(); i++) {//if player overlaps with an ammo crate it gives the player 10 ammo
     if (john.overlap(crates.get(i))) {
       john.ammo+=10;
       crates.remove(i);
     }
   }
-  if (mousePressed==true && mouseX>width-30 && mouseX<width && mouseY>0 && mouseY<30) {
+  if (mousePressed==true && mouseX>width-30 && mouseX<width && mouseY>0 && mouseY<30) {//start screen
     System.out.println("true");
     level = -1;
     background (0);
@@ -134,7 +134,7 @@ void draw() {
 
 
 
-  if (level==-1) {
+  if (level==-1) {//menu page
 
     background(0);
     background(grinch1);
@@ -144,7 +144,7 @@ void draw() {
     //startscreen = loadImage("santa.png");
     //image(startscreen, 0, 0, width, height);
 
-    for (int i = 0; i < flakes.length; i++) {
+    for (int i = 0; i < flakes.length; i++) {//snowflakes go down screen
       flakes[i] .display();
       if (flakes[i].x > 280 && flakes[i].y >445 && flakes[i].x<400) {
         flakes[i].bounce();
@@ -157,7 +157,7 @@ void draw() {
       grinch1=original;
     }
 
-    if (mouseX>70 && mouseX<380 && mouseY>430 && mouseY<485 && mousePressed ==true) {
+    if (mouseX>70 && mouseX<380 && mouseY>430 && mouseY<485 && mousePressed ==true) {//easy level
       level = 0;
     }
 
@@ -167,7 +167,7 @@ void draw() {
       grinch1=grinch3;
     }
 
-    if (mouseX>70 && mouseX<500 && mouseY>492 && mouseY<554 && mousePressed ==true) {
+    if (mouseX>70 && mouseX<500 && mouseY>492 && mouseY<554 && mousePressed ==true) {//medium level
       level = 6;
     }
 
@@ -177,7 +177,7 @@ void draw() {
       grinch1=grinch4;
     }
 
-    if (mouseX>70 && mouseX<380 && mouseY>544 && mouseY<606 && mousePressed ==true) {
+    if (mouseX>70 && mouseX<380 && mouseY>544 && mouseY<606 && mousePressed ==true) {//hard level
       level = 10;
     }
   }
@@ -185,10 +185,10 @@ void draw() {
   //------------------------------------------------------------------------------------------
 
 
-  if (level>-1) {
+  if (level>-1) {//leveling system that implements 5 more grinches per level and makes the grinches faster
     for (int l = 0; l<100; l++) {
       if (level==l) {
-        if (grinches.size()==0&&john.health>0) {
+        if (grinches.size()==0&&john.health>0) {//if player is alive and grinches are all dead, move on to the next level
           crates.clear();
           barrels.clear();
           projectiles.clear();
@@ -221,7 +221,7 @@ void draw() {
           grinches.clear();
           crates.clear();
           barrels.clear();
-        }
+        }//all the numbers that are shown on screen
         textAlign(LEFT);
         text("Health: "+john.health, 20, 50);//health bar
         text("Ammo: "+john.ammo, 20, 100);
