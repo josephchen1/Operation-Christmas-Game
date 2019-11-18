@@ -23,11 +23,11 @@ class Projectile {
     angle = atan2(yDiff, xDiff);
   }
 
-  void display() {
+  void display() {//displays projectile
     image(img, x, y);
   }
 
-  void move() {
+  void move() {//moves projectile in the direction mouse was pointing
     x += speed*cos(angle);
     y += speed*sin(angle);
   }
