@@ -1,4 +1,4 @@
-class Zombie {
+class Grinch {
   float x;
   float y;
   float health;
@@ -6,7 +6,7 @@ class Zombie {
   float speed;
 
 
-  Zombie(float xx, float yy, float spd) {
+  Grinch(float xx, float yy, float spd) {
     x = xx;
     y = yy;
     speed = spd;
@@ -19,9 +19,9 @@ class Zombie {
   }
 
   public void update() {
-    for (int i = 0; i < zombies.size(); i ++) {
-      zombies.get(i).display();
-      zombies.get(i).move(john);
+    for (int i = 0; i < grinches.size(); i ++) {
+      grinches.get(i).display();
+      grinches.get(i).move(john);
     }
   }
   
