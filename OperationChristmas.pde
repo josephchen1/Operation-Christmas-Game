@@ -13,7 +13,7 @@ boolean up, down, left, right;
 int level;
 Player john = new Player(800, 500, 3, 100);
 ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-ArrayList<Zombie> zombies = new ArrayList<Zombie> ();
+ArrayList<Grinch> grinches = new ArrayList<Grinch> ();
 ArrayList<Barrel> barrels = new ArrayList<Barrel>();
 ArrayList<AmmoCrate> crates = new ArrayList<AmmoCrate>();
 float x = 500;
@@ -21,7 +21,6 @@ float y = 500;
 boolean shootdelay = false;
 int killcount=0;
 int ammoreload = 0;
-ArrayList<Particle> explosion = new ArrayList<Particle>();
 int MAX = 80;
 PImage expl;
 import processing.sound.*;
@@ -81,21 +80,14 @@ void draw() {
     john.energy += 0.01;
   }
   background (0);
-  for (int i = 0; i < explosion.size(); i++) {
-    Particle p = (Particle) explosion.get(i); 
-    p.run();
-    p.update();
-    p.acceleration();
-    p.disappear();
-  }
 
   for (int x = 0; x<projectiles.size(); x++) {
-    for (int y = 0; y<zombies.size(); y++) {
-      float distance_x = zombies.get(y).x - projectiles.get(x).x;
-      float distance_y = zombies.get(y).y - projectiles.get(x).y;
+    for (int y = 0; y<grinches.size(); y++) {
+      float distance_x = grinches.get(y).x - projectiles.get(x).x;
+      float distance_y = grinches.get(y).y - projectiles.get(x).y;
       float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
-      if (distance < (zombies.get(y).radius/2 + projectiles.get(x).size/2)) {
-        zombies.remove(y);
+      if (distance < (grinches.get(y).radius/2 + projectiles.get(x).size/2)) {
+        grinches.remove(y);
         killcount ++;
         john.money++;
       }
@@ -108,9 +100,6 @@ void draw() {
       float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
       if (distance < (barrels.get(y).radius/2 + projectiles.get(x).size/2)) {
         background(0);
-        for (int i = 0; i < MAX; i ++) {
-          explosion.add(new Particle(barrels.get(y).x, barrels.get(y).y));
-        }
         barrels.get(y).explode(barrels.get(y).x, barrels.get(y).y);
         barrels.remove(y);
       }
@@ -194,7 +183,7 @@ void draw() {
   if (level>-1) {
     for (int l = 0; l<100; l++) {
       if (level==l) {
-        if (zombies.size()==0&&john.health>0) {
+        if (grinches.size()==0&&john.health>0) {
           crates.clear();
           barrels.clear();
           projectiles.clear();
@@ -206,16 +195,16 @@ void draw() {
           }
           level+=1;
           for (int i= 0; i<level; i++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(-100, 0), random(height), random(1+0.1*level, 3+0.1*level)));
+            grinches.add(new Grinch(random(-100, 0), random(height), random(1+0.1*level, 3+0.1*level)));
           }
           for (int x= 0; x<level; x++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(width+100, width), random(height), random(1+0.1*level, 3+0.1*level)));
+            grinches.add(new Grinch(random(width+100, width), random(height), random(1+0.1*level, 3+0.1*level)));
           }
           for (int j= 0; j<level; j++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(width), random(height+100, height), random(1+0.1*level, 3+0.1*level)));
+            grinches.add(new Grinch(random(width), random(height+100, height), random(1+0.1*level, 3+0.1*level)));
           }
           for (int k= 0; k<level; k++) { //Creates 5l enemies
-            zombies.add(new Zombie(random(width), random(-100, 0), random(1+0.1*level, 3+0.1*level)));
+            grinches.add(new Grinch(random(width), random(-100, 0), random(1+0.1*level, 3+0.1*level)));
           }
         }
 
@@ -223,7 +212,7 @@ void draw() {
         fill(255, 0, 0);
         john.play();
         if (john.health<=0) {
-          zombies.clear();
+          grinches.clear();
           crates.clear();
           barrels.clear();
         }
