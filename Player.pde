@@ -171,7 +171,7 @@ class Player {//attributes
       health = 0; 
       dead = true;
       textAlign(CENTER);
-      text("WASTED", width/2, height/2, -30);
+      text("WASTED", width/2, height/2+100, -30);
       rectMode(CENTER);
       textSize(25);
       text("YOUR SCORE: "+killcount, width/2, height/2-270);
