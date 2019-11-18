@@ -1,4 +1,4 @@
-class Player {//attributes player is santa who is controlled by wasd for movement and mouse click for shooting and aiming
+class Player {//attributes of Player (who plays as Santa) 
   public int money = 0;
   private float speed;
   private int health=100;
@@ -23,7 +23,8 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
 
 
 
-  public void display() {//displays player (essentially three circles) along with energy and ammo amount as well as a projectile if it exists
+  public void display() {//displays Player (essentially three circles) as well as Projectiles, Ammo Crates, Barrels, and Grinches
+  //basically an encompassing display function 
     stroke(0);
     fill(255, 10, 14);
     ellipse(this.pos.x, this.pos.y, Pradius, Pradius);
@@ -31,15 +32,15 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
     rect(this.pos.x-30, this.pos.y-10, 60, 10);
     fill(255,255,255);
     ellipse(this.pos.x-15, this.pos.y-17, 20, 20);
-    for (int i = 0; i < projectiles.size(); i ++) {
+    for (int i = 0; i < projectiles.size(); i ++) { //displays each projectile and updates their location
       projectiles.get(i).display();
       projectiles.get(i).move();
     }
-    for (int x = 0; x < grinches.size(); x ++) {//displays grinches and haves them move toward the player
+    for (int x = 0; x < grinches.size(); x ++) {//displays each grinch and updates their location
       grinches.get(x).display();
       grinches.get(x).move(john);
-      punch(grinches.get(x)); //checks if grinch hits player
-      if (hit==true) { //grinches die after one hit of the player
+      punch(grinches.get(x)); //checks if grinch hits Player, if so, damages player
+      if (hit==true) { //grinches die after overlapping with Player
         grinches.remove(x);
       }
     }
@@ -52,14 +53,14 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
     }
 
     fill(255, 25, 47);
-    rectMode(CORNER); // health bar
+    rectMode(CORNER); //health bar display
     rect(12*health-1200, 0, 1200, 5);
     fill(0);
   }
 
 
 
-  public void teleport() { //if player goes off the screen it comes back on the other side
+  public void teleport() { //if player goes off the screen, they will come back on the other side
     if (pos.y < -Pradius) {
       pos.y = height + Pradius;
     } else
@@ -73,7 +74,7 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
     }
   }
 
-  public void slowmotion() {//press q for slow motion which costs energy
+  public void slowmotion() {//press 'Q' for slow motion which uses Player energy
     if (keyPressed && energy>0) { 
       if (key == 'q' || key == 'Q') {
         delay(100);
@@ -83,7 +84,7 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
   }
 
 
-  void move () { //player wasd move function
+  void move () { //player WASD movement function
     if (up) { 
       pos.y -= speed;
     }
@@ -97,7 +98,7 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
       pos.x += speed;
     }
 
-    if (health <=0) {
+    if (health <=0) { //implementation of die() function after health goes down to zero
       textSize(200);
       fill(196, 24, 24);
       textSize(230);
@@ -107,7 +108,7 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
   }
 
 
-  public void shoot() {//adding projectiles
+  public void shoot() {//adding projectiles method
     if (dead==false&&shootdelay==true&&ammo>0) {
       projectiles.add(new Projectile(this.pos.x, this.pos.y, size));
       shootdelay=false;
@@ -116,7 +117,7 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
   }
 
 
-  public void punch(Grinch other) {//player grinch overlap method
+  public void punch(Grinch other) {//player&grinch overlap method
     float distance_x = other.x - pos.x;
     float distance_y = other.y - pos.y;
 
@@ -128,7 +129,7 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
       hit = false;
   }
 
-  public boolean overlap(AmmoCrate other) { // player ammo crate overlap method
+  public boolean overlap(AmmoCrate other) { // player&ammo crate overlap method
     float distance_x = other.x - pos.x;
     float distance_y = other.y - pos.y;
     float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
@@ -139,7 +140,7 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
     }
   }
 
-  public void play() {
+  public void play() { //incorporates various methods into one method for ease
     move();
     display();
     shoot();
@@ -147,8 +148,8 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
     keyPressed();
   }
 
-  public void keyPressed() {//upgrade system
-    if (money >= 10 && (key=='R'||key=='r')) {//upgrade speed
+  public void keyPressed() {//upgrade system with money
+    if (money >= 10 && (key=='R'||key=='r')) {//upgrade Player speed
       money-=10;
       john.speed+=0.1;
       speedupgrade++;
@@ -164,7 +165,7 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
     }
   }
 
-  public void die() {//death takes player off screen shows "Wasted" and gives a respawn option
+  public void die() {//death function which moves player off-screen, displays 'WASTED' and scores, and displays respawn option
     if (health <= 0) {
       pos.y = -100000000; 
       pos.x = -100000000; 
@@ -182,7 +183,7 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
       rect(540, 600, 500, 50);
       fill(0, 0, 0);
       text("Respawn", 540, 610);
-      if (mouseX>290 && mouseX<790 && mouseY>550 && mouseY<650 && mousePressed==true) {
+      if (mouseX>290 && mouseX<790 && mouseY>550 && mouseY<650 && mousePressed==true) { //respawn function
         level=-1;
         speed=3;
         bulletupgrade=0;
