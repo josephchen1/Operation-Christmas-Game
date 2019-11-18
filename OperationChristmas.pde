@@ -25,12 +25,30 @@ int ammoreload = 0;
 int MAX = 80;
 PImage expl;
 import processing.sound.*;
+import ddf.minim.*;
+
+boolean throNow = false;
+boolean punchNow = false;
+boolean hohoNow = false; 
+boolean loseNow = false; 
+
+AudioSnippet thro; 
+AudioSnippet hoho; 
+AudioSnippet lose; 
+
+Minim minim; 
+
 SoundFile meanone;
 Snow[] flakes = new Snow[300];
 
 void setup() { //plays the song "you're a mean one mr. Grinch"
   meanone = new SoundFile(this, "meanone.mp3");
   meanone.play();
+  
+   minim = new Minim(this); 
+    thro = minim.loadSnippet("throw.mp3");
+    hoho = minim.loadSnippet("hohoho.mp3");
+    lose = minim.loadSnippet("lose.mp3");
   
   level = -1;
   size(1080, 720);
