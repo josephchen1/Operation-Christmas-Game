@@ -24,13 +24,13 @@ int highscore=0;
 int ammoreload = 0;
 int MAX = 80;
 PImage expl;
-import processing.sound.*;
-SoundFile meanone;
+//import processing.sound.*;
+//SoundFile meanone;
 Snow[] flakes = new Snow[300];
 
 void setup() {
-  meanone = new SoundFile(this, "meanone.mp3");
-  meanone.play();
+  //meanone = new SoundFile(this, "meanone.mp3");
+  //meanone.play();
   level = -1;
   size(1080, 720);
   grinch1 = loadImage("grinch1.png");
@@ -223,12 +223,16 @@ void draw() {
         textAlign(LEFT);
         text("Health: "+john.health, 20, 50);//health bar
         text("Ammo: "+john.ammo, 20, 100);
-        text("Kill Count: "+killcount, 20, 150);
-        text("Energy: "+(int)john.energy, 20, 200);
-        text("Money: "+john.money, 20, 250);
-        text("Level: "+level, 20, 300);
-        text("Bullet Upgrade: "+john.bulletupgrade, 20, 350);
-        text("Speed Upgrade: "+john.speedupgrade, 20, 400);
+        text("Energy: "+(int)john.energy, 20, 150);
+        textAlign(CENTER);
+        textSize(30);
+        text("Level: "+level, width/2, 50);
+        textSize(20);
+        textAlign(RIGHT);
+        text("Kill Count: "+killcount, width-20, 50);
+        text("Money: "+john.money, width-20, 100);
+        text("Bullet Upgrade: "+john.bulletupgrade, width-20, 150);
+        text("Speed Upgrade: "+john.speedupgrade, width-20, 200);
       }
     }
   }
