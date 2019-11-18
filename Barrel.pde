@@ -3,9 +3,10 @@ class Barrel {//attributes of Barrel appears every round, if it is shot it kills
   public float y;
   float radius = 20;
 
-  public Barrel(float xx, float yy) {//constructor
+  public Barrel(float xx, float yy,float r) {//constructor
     x = xx;
     y = yy;
+    radius = r;
   }
 
   public void explode(float x, float y) {//explosion method (removes all grinches in a radius of 200 if shot by projectile)
