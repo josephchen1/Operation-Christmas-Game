@@ -1,4 +1,4 @@
-class AmmoCrate {//attributes
+class AmmoCrate {//attributes Ammo crate gives player 10 ammo when player goes over it
   public float x;
   public float y;
   public float size = 40;
