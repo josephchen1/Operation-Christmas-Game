@@ -1,4 +1,4 @@
-class AmmoCrate {
+class AmmoCrate {//attributes
   public float x;
   public float y;
   public float size = 40;
