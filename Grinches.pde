@@ -33,16 +33,5 @@ class Grinch {//attributes of grinches (the enemy in the game) spawns every roun
     float angle = atan2(yDiff, xDiff);
     x -= cos(angle)*speed;
     y -= sin(angle)*speed;
-    
-      
-      
-  
-
-    //x -= 10*(1/xDiff);
-    //y -= 10*(1/yDiff);
-    //float distance = sqrt(xDiff*xDiff+yDiff*yDiff);
-    //float angle = atan2(yDiff, xDiff);
-    //dx -= cos(angle);
-    //dy -= sin(angle)
   }
 }
