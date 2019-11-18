@@ -13,8 +13,15 @@ class Barrel {
   }
 
   public void explode(float x, float y) {
-    explosion = loadImage("explosion.jpg");
-    image(explosion, x, y, 50, 50);
+    System.out.print("explode");
+    for (int z = 0; z<zombies.size(); z++) {
+      float distance_x = zombies.get(z).x - x;
+      float distance_y = zombies.get(z).y - y;
+      float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
+      if (distance <= 200) {
+        zombies.remove(z);
+      }
+    }
   }
 
   public void display() {
