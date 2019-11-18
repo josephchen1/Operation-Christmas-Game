@@ -1,4 +1,4 @@
-class Player {
+class Player {//attributes
   public int money = 0;
   private float speed;
   private int health=100;
@@ -14,7 +14,7 @@ class Player {
   int bulletupgrade = 0;
   int speedupgrade = 0;
 
-  public Player (float xx, float yy, float spd, int hhealth) {
+  public Player (float xx, float yy, float spd, int hhealth) {//constructor
     this.pos.x = xx;
     this.pos.y = yy;
     this.speed = spd;
@@ -23,7 +23,7 @@ class Player {
 
 
 
-  public void display() {
+  public void display() {//displays player (essentially three circles) along with energy and ammo amount as well as a projectile if it exists
     stroke(0);
     fill(255, 10, 14);
     ellipse(this.pos.x, this.pos.y, Pradius, Pradius);
@@ -36,24 +36,24 @@ class Player {
       projectiles.get(i).display();
       projectiles.get(i).move();
     }
-    for (int x = 0; x < zombies.size(); x ++) {
+    for (int x = 0; x < zombies.size(); x ++) {//displays zombies and haves them move toward the player
       zombies.get(x).display();
       zombies.get(x).move(john);
-      punch(zombies.get(x));
-      if (hit==true) {
+      punch(zombies.get(x)); //checks if zombie hits player
+      if (hit==true) { //zombies die after one hit of the player
         zombies.remove(x);
       }
     }
 
-    for (int z = 0; z < barrels.size(); z ++) {
+    for (int z = 0; z < barrels.size(); z ++) {//displays barrels
       barrels.get(z).display();
     }
-    for (int i = 0; i < crates.size(); i ++) {
+    for (int i = 0; i < crates.size(); i ++) {//displays ammo crates
       crates.get(i).display();
     }
 
     fill(255, 25, 47);
-    rectMode(CORNER);
+    rectMode(CORNER); // health bar
     rect(12*health-1200, 0, 1200, 5);
     fill(0);
     text("Health: "+health, 80, 30);//health bar
@@ -61,7 +61,7 @@ class Player {
 
 
 
-  public void teleport() {
+  public void teleport() { //if player goes off the screen it comes back on the other side
     if (pos.y < -Pradius) {
       pos.y = height + Pradius;
     } else
@@ -75,7 +75,7 @@ class Player {
     }
   }
 
-  public void slowmotion() {
+  public void slowmotion() {//press q for slow motion which costs energy
     if (keyPressed && energy>0) { 
       if (key == 'q' || key == 'Q') {
         delay(100);
@@ -85,7 +85,7 @@ class Player {
   }
 
 
-  void move () { 
+  void move () { //player wasd move function
     if (up) { 
       pos.y -= speed;
     }
@@ -109,7 +109,7 @@ class Player {
   }
 
 
-  public void shoot() {
+  public void shoot() {//adding projectiles
     if (dead==false&&shootdelay==true&&ammo>0) {
       projectiles.add(new Projectile(this.pos.x, this.pos.y, size));
       shootdelay=false;
@@ -118,7 +118,7 @@ class Player {
   }
 
 
-  public void punch(Zombie other) {
+  public void punch(Zombie other) {//player zombie overlap method
     float distance_x = other.x - pos.x;
     float distance_y = other.y - pos.y;
 
@@ -130,7 +130,7 @@ class Player {
       hit = false;
   }
 
-  public boolean overlap(AmmoCrate other) {
+  public boolean overlap(AmmoCrate other) { // player ammo crate overlap method
     float distance_x = other.x - pos.x;
     float distance_y = other.y - pos.y;
     float distance = sqrt(distance_x * distance_x + distance_y * distance_y);
