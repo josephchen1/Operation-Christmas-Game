@@ -36,12 +36,12 @@ class Player {//attributes
       projectiles.get(i).display();
       projectiles.get(i).move();
     }
-    for (int x = 0; x < zombies.size(); x ++) {//displays zombies and haves them move toward the player
-      zombies.get(x).display();
-      zombies.get(x).move(john);
-      punch(zombies.get(x)); //checks if zombie hits player
-      if (hit==true) { //zombies die after one hit of the player
-        zombies.remove(x);
+    for (int x = 0; x < grinches.size(); x ++) {//displays grinches and haves them move toward the player
+      grinches.get(x).display();
+      grinches.get(x).move(john);
+      punch(grinches.get(x)); //checks if grinch hits player
+      if (hit==true) { //grinches die after one hit of the player
+        grinches.remove(x);
       }
     }
 
@@ -118,7 +118,7 @@ class Player {//attributes
   }
 
 
-  public void punch(Zombie other) {//player zombie overlap method
+  public void punch(Grinch other) {//player grinch overlap method
     float distance_x = other.x - pos.x;
     float distance_y = other.y - pos.y;
 
