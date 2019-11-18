@@ -1,4 +1,4 @@
-class Grinch {
+class Grinch {//attributes of grinches (the enemy in the game) spawns every round and attacks player taking away 10 health if hit, takes one bullet to kill
   float x;
   float y;
   float health;
@@ -8,7 +8,7 @@ class Grinch {
 
 
 
-  Grinch(float xx, float yy, float spd) {
+  Grinch(float xx, float yy, float spd) {//constructor
     x = xx;
     y = yy;
     speed = spd;        
@@ -16,18 +16,18 @@ class Grinch {
 
   }
 
-  void display() {
+  void display() {//displays the image of a grinch
     image (img,x, y);
   }
 
-  public void update() {
+  public void update() {//updates the grinch location and the location it is moving towards
     for (int i = 0; i < grinches.size(); i ++) {
       grinches.get(i).display();
       grinches.get(i).move(john);
     }
   }
   
-  void move(Player player) {
+  void move(Player player) {//moves the grinch towards the current position of the player
     float xDiff = x - player.pos.x;
     float yDiff = y - player.pos.y;
     float angle = atan2(yDiff, xDiff);
