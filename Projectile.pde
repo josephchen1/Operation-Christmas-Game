@@ -1,4 +1,6 @@
 class Projectile {
+  
+  PImage img;
 
   //Fields
   float x, y, angle, speed, xInitialOffset, yInitialOffset, size;
@@ -13,6 +15,8 @@ class Projectile {
     float dx = speed*cos(angle);
     float dy = speed*sin(angle);
     destroy = false;
+    
+    img = loadImage("snowballs.png");
 
     float xDiff = mouseX - x;
     float yDiff = mouseY - y;
@@ -20,8 +24,7 @@ class Projectile {
   }
 
   void display() {
-    fill(255, 0, 0);
-    ellipse(x, y, size, size);
+    image(img, x, y);
   }
 
   void move() {
