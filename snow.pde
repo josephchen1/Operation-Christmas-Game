@@ -12,11 +12,11 @@ class Snow {//attributes (snow shows on start screen when you are choosing diffi
     diameter = D;
   }
   
-  void spreadY(int i) {
+  void spreadY(int i) { //spreading snow along the top face of the screen
     y = y - i*3;
   }
   
-  void display() {
+  void display() { //display snow
     alpha = map(y, 0, height, 255, -50);
     noStroke();
     fill(255, alpha);
@@ -36,7 +36,7 @@ class Snow {//attributes (snow shows on start screen when you are choosing diffi
     }
     
     }
-  void bounce(){
+  void bounce(){//move function of snow
     y = y - speed; 
 }
 }
