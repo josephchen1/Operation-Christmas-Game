@@ -24,10 +24,13 @@ int ammoreload = 0;
 ArrayList<Particle> explosion = new ArrayList<Particle>();
 int MAX = 80;
 PImage expl;
-
-
+import processing.sound.*;
+SoundFile meanone;
 Snow[] flakes = new Snow[300];
+
 void setup() {
+meanone = new SoundFile(this, "meanone.mp3");
+meanone.play();
   level = -1;
   size(1080, 720);
   grinch1 = loadImage("grinch1.png");
