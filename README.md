@@ -12,7 +12,7 @@ First, download all the files in the repository. Then, create a new project in P
 # Controls
 
 
-# uthors
+# Authors
 * Joseph Chen
 * Eric Obukhanich
 * Nathan Zhou
