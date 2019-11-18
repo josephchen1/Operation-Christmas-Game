@@ -27,9 +27,10 @@ class Player {//attributes player is santa who is controlled by wasd for movemen
     stroke(0);
     fill(255, 10, 14);
     ellipse(this.pos.x, this.pos.y, Pradius, Pradius);
-    ellipse(this.pos.x-20, this.pos.y, 20, 20);
-    ellipse(this.pos.x+20, this.pos.y, 20, 20);
-    textSize(20);
+    fill(255,255,255);
+    rect(this.pos.x-30, this.pos.y-10, 60, 10);
+    fill(255,255,255);
+    ellipse(this.pos.x-15, this.pos.y-17, 20, 20);
     for (int i = 0; i < projectiles.size(); i ++) {
       projectiles.get(i).display();
       projectiles.get(i).move();
