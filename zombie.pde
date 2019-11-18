@@ -1,4 +1,4 @@
-class Zombie {//attributes
+class Zombie {
   float x;
   float y;
   float health;
@@ -6,25 +6,26 @@ class Zombie {//attributes
   float speed;
 
 
-  Zombie(float xx, float yy, float spd) {//constructor
+  Zombie(float xx, float yy, float spd) {
     x = xx;
     y = yy;
     speed = spd;
   }
 
-  void display() {//displays player on screen as a circle
-    fill(0);
+  void display() {
+    noStroke();
+    fill(50,205,50);
     ellipse (x, y, radius, radius);
   }
 
-  public void update() {//updates location zombies are moving towards ie. player
+  public void update() {
     for (int i = 0; i < zombies.size(); i ++) {
       zombies.get(i).display();
       zombies.get(i).move(john);
     }
   }
   
-  void move(Player player) {//player move method
+  void move(Player player) {
     float xDiff = x - player.pos.x;
     float yDiff = y - player.pos.y;
     float angle = atan2(yDiff, xDiff);
