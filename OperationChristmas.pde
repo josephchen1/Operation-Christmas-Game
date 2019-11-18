@@ -173,7 +173,6 @@ void draw() {
 
     if (mouseX>70 && mouseX<380 && mouseY>544 && mouseY<606) {
       grinch1=grinch4;
-      System.out.println("hi");
     }
 
     if (mouseX>70 && mouseX<380 && mouseY>544 && mouseY<606 && mousePressed ==true) {
